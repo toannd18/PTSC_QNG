@@ -1,0 +1,62 @@
+﻿@model List<Data.Data.tbl_Notifications>
+@{
+    ViewBag.Title = "Notification";
+    Layout = "~/Views/Shared/_Layoutadmin.cshtml";
+}
+
+@section style{
+    <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+}
+@section jfooter{
+
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
+
+    <script>
+        $("#Noftbl").DataTable({
+            
+            order:[[2,"desc"]]
+        })
+    </script>
+}
+<h3 class="blank1">Danh Mục Thông báo</h3>
+
+<div class="bs-example4" data-example-id="simple-responsive-table">
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped" id="Noftbl">
+            <thead>
+                <tr>
+                    <th>Mã người gửi</th>
+                    <th>Nội dung thông báo</th>
+                    <th>Ngày gửi</th>
+                    <th>Tình trạng</th>
+                </tr>
+            </thead>
+            <tbody>
+               
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>@item.SendId</td>
+                <td>@item.Notification</td>
+                <td data-order="@item.Date">@item.Date.ToString("dd/MM/yyyy HH:mm")</td>
+                <td><a href="@item.Url">@if (item.Status) {
+                                            <span class="label label-danger">Chưa đọc</span>
+                }
+                else
+                {
+                    <span class="label label-info">Đã đọc</span>
+                 }
+                    </a>
+                </td>
+            </tr>
+                 
+            }
+
+
+            </tbody>
+        </table>
+    </div><!-- /.table-responsive -->
+</div>

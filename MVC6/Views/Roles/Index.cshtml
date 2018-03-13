@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layoutadmin.cshtml";
+}
+@section style{
+    <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+}
+@section jfooter{
+
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
+    <script src="~/Scripts/asset/role.js"></script>
+}
+<h3 class="blank1">Bảng Nhóm Quyền</h3>
+<div class="form-group">
+    <button class="btn btn-primary" onclick="detail(0)">Thêm Mới</button>
+</div>
+<div class="bs-example4" data-example-id="simple-responsive-table">
+    <div class="table-responsive">
+        <table class="table table-bordered" id="roletbl">
+            <thead>
+                <tr>
+                    <th>Mã</th>
+                    <th>Tên</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div><!-- /.table-responsive -->
+</div>
+<!-- Modal -->
+@Html.Partial("~/Views/Shared/_Modal.cshtml")

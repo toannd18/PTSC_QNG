@@ -1,0 +1,97 @@
+﻿@model DataModel.Model.Applications.RequestModel
+<form class="form-horizontal" id="requireform">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.Date_Nhap)
+    @Html.HiddenFor(m => m.FirstId)
+    <div class="form-group">
+        @Html.LabelFor(m => m.LateId, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.LateId, new { @class = "form-control", @readonly = "readonly" })
+            @Html.ValidationMessageFor(m => m.LateId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Ma_BP, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.Ma_BP, ViewBag.Depart as SelectList, "--- Chọn ---", new { @class = "form-control", @readonly = "readonly" })
+            @Html.ValidationMessageFor(m => m.Ma_BP, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Dia_Diem, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Dia_Diem, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Dia_Diem, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Date, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Date, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })
+            @Html.ValidationMessageFor(m => m.Date, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Hang_Muc, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Hang_Muc, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Dia_Diem, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.HopDong, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.HopDong, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.HopDong, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.DeXuat, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.DeXuat, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.DeXuat, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.CO, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.CheckBoxFor(m => m.CO)
+            @Html.ValidationMessageFor(m => m.CO, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.CQ, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.CheckBoxFor(m => m.CQ)
+            @Html.ValidationMessageFor(m => m.CQ, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Other, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="input-group" style="margin:0 0 0 0;width:unset">
+                <span class="input-group-addon">
+                    @Html.CheckBoxFor(m => m.Other)
+                </span>
+
+                @if (Model.Other)
+                {
+                    @Html.TextBoxFor(m => m.Note, new { @class = "form-control" });
+                }
+                else
+                {
+                    @Html.TextBoxFor(m => m.Note, new { @class = "form-control", @readonly = "readonly" });
+                }
+
+                @Html.ValidationMessageFor(m => m.Note, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-8">
+            <input type="button" class="btn btn-success" onclick="save()" value="Lưu" />
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        </div>
+    </div>
+</form>

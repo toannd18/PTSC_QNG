@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title= "Index";
+    Layout = "~/Views/Shared/_Layoutadmin.cshtml";
+}
+@section style{
+    <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+}
+@section jfooter{
+
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
+    <script src="~/Scripts/js/Systems/provide.js"></script>
+}
+<h3 class="blank1">Danh Mục Nhà Cung Cấp</h3>
+<div class="form-group">
+    <button class="btn btn-primary" onclick="detail('')">Thêm Mới</button>
+</div>
+<div class="bs-example4" data-example-id="simple-responsive-table">
+    <div class="table-responsive">
+        <table class="table-striped table-bordered" id="providetbl">
+            <thead>
+                <tr>
+                    <th>Mã</th>
+                    <th>Tên Nhà Cung Cấp</th>
+                    <th>Địa chỉ</th>
+                    <th>Tel-(Fax)</th>
+                    <th>Người liên hệ</th>
+                    <th>Email</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div><!-- /.table-responsive -->
+</div>
+<!-- Modal -->
+@Html.Partial("~/Views/Shared/_Modal.cshtml")

@@ -1,0 +1,31 @@
+﻿@model Data.Data.AppUser
+<div class="profile_details" >
+    <ul>
+        
+        <li class="dropdown profile_details_drop">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <div class="profile_img">
+                    <span style="background:url(@Url.Content(Model.Avatar)) no-repeat center"> </span>
+                    <div class="user-name">
+                        <p>@Model.UserName<span style="width:auto">@Model.FullName</span></p>
+                    </div>
+                    <i class="lnr lnr-chevron-down"></i>
+                    <i class="lnr lnr-chevron-up"></i>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+            <ul class="dropdown-menu drp-mnu">
+                <li> <a href="/Account/ChangePassword"><i class="fa fa-cog"></i>Đổi Mật Khẩu</a> </li>
+                <li> <a href="#"><i class="fa fa-user"></i>Hồ sơ</a> </li>
+                <li>
+                    <form method="post" action="/Account/Logout" id="logoutform">
+                        <a href="javascript:document.getElementById('logoutform').submit()"><i class="fa fa-sign-out"></i> Logout</a>
+                    </form>
+
+                </li>
+            </ul>
+        </li>
+
+    </ul>
+</div>
+

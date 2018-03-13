@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layoutadmin.cshtml";
+}
+@section style{
+    <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+}
+@section jfooter{
+
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
+    
+<script src="~/Scripts/js/dailys/report.js"></script>
+}
+<h3 class="blank1">Nhật Ký Công Việc</h3>
+<div class="form-group">
+    <button class="btn btn-primary" onclick="detail(0)">Thêm Mới</button>
+    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#ExportModal">Xuất Excel</button>
+</div>
+<div class="bs-example4" data-example-id="simple-responsive-table">
+    <div class="table-responsive">
+        <table class="cell-border table-striped table-bordered" id="reporttbl" style="font-family:'Times New Roman', Times, serif;font-size:11px">
+            <thead>
+                <tr>
+                    <th>Thời Gian</th>
+                    <th>Họ và Tên</th>
+                    <th>Tổng kết các công việc chính</th>
+                    <th>Tổ trưởng/phụ trách tổ</th>
+                    <th>Phụ trách trực tiếp</th>
+                    <th>Trưởng Bộ Phận</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div><!-- /.table-responsive -->
+</div>
+<!-- Modal -->
+@Html.Partial("~/Views/Shared/_Modal.cshtml")
+<div id="ExportModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            
+            <div class="modal-dialog">
+                <br />
+                <form class="form-horizontal">
+                    <div class="form-group col-md-6">
+                        <label class="control-label col-md-2">Từ:</label>
+                        <div class=" col-md-10">
+                            <input type="date" class="form-control" id="FromTime" />
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label col-md-2">Tới:</label>
+                        <div class=" col-md-10">
+                            <input type="date" class="form-control" id="ToTime" />
+                        </div>
+                    </div>
+                </form>
+    <br />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="ExportExcel()" data-dismiss="modal">Xuất</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+
+    </div>
+</div>

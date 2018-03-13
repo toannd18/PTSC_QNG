@@ -1,0 +1,51 @@
+﻿@model DataModel.Model.Applications.ResponeModel
+<div>
+    <table border="1">
+        <thead>
+            <tr>
+                <th colspan="2">
+                    <strong>Thông tin Phiếu Kiểm Tra</strong>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Mã số phiếu</td>
+                <td>@Model.LateId</td>
+            </tr>
+            <tr>
+                <td>Bộ Phận Mời kiểm Tra</td>
+                <td>@Model.Ten_BP</td>
+            </tr>
+            <tr>
+                <td>Địa Điểm Kiểm Tra</td>
+                <td>@Model.Dia_Diem</td>
+            </tr>
+            <tr>
+                <td>Thời Gian Kiểm Tra</td>
+                <td>@String.Format("{0:dd/MM/yyyy}",Model.Date)</td>
+            </tr>
+            <tr>
+                <td>Nội dung kiểm tra</td>
+                <td>@Model.Hang_Muc</td>
+            </tr>
+            <tr>
+                <td>Người Gửi</td>
+                <td>@Model.FullName</td>
+            </tr>
+            <tr>
+                <td>Ngày Gửi</td>
+                <td>@Model.Date_Autho</td>
+            </tr>
+            <tr>
+                <td>Tài Liệu Đính Kèm</td>
+                <td><a href="@Model.UrlFile">Tải Xuống</a></td>
+            </tr>
+            <tr>
+                <td>Chi Tiết</td>
+                <td><a href="@Model.Url">Chi Tiết</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

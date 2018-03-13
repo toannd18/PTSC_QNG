@@ -1,0 +1,27 @@
+﻿
+
+<ul id="treeview">
+   @foreach(var treeview1 in ViewBag.TreeView)
+   {
+       <li>
+           @treeview1.Name
+           <button class="btn btn-primary" onclick="showpermission('@treeview1.Id')"><i class="fa fa-lock" aria-hidden="true"></i></button>
+           <button class="btn btn-sm btn-success" onclick="detail('@treeview1.Id')"><i class="fa fa-pencil-square" aria-hidden="true"></i></button>
+           <button class="btn btn-danger" onclick="deletedata('@treeview1.Id')"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+           @if (treeview1.Functions1.Count > 0)
+           {
+               <ul>
+                   @foreach(var treeview2 in treeview1.Functions1)
+                   {
+                       <li>@treeview2.Name <button class="btn btn-primary" onclick="showpermission('@treeview2.Id')"><i class="fa fa-lock" aria-hidden="true"></i></button>
+                           <button class="btn btn-sm btn-success" onclick="detail('@treeview2.Id')"><i class="fa fa-pencil-square" aria-hidden="true"></i></button>
+                           <button class="btn  btn-danger" onclick="deletedata('@treeview2.Id')"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                        </li>
+                       
+                   }
+               </ul>
+           }
+       </li>
+    
+   }
+ </ul>

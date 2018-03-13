@@ -1,0 +1,12 @@
+@model List<DataModel.Model.Reports.ExportDailyModel>
+@Html.DevExpress().DocumentViewer(settings => {
+    settings.Name = "DocumentViewer";
+    settings.CallbackRouteValues = new { Controller = "Reports", Action = "DocumentViewerPartial",Area="Report",ma=ViewBag.Id };
+    settings.ExportRouteValues = new { Controller = "Reports", Action = "DocumentViewerPartialExport", Area = "Report",ma=ViewBag.Id };
+    settings.Report = new XtraReportDaily()
+    {
+        DataSource = Model
+    };
+
+
+}).GetHtml()

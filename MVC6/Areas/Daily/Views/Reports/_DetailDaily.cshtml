@@ -1,0 +1,19 @@
+﻿@model DataModel.Model.DailyReport.ReportModel
+    
+<form class="form-horizontal" id="reportform">
+    @Html.HiddenFor(m => m.Id)
+    <div class="form-group">
+        <label class="control-label col-md-2">Thời Gian</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Date, "{0:yyyy-MM-dd}", new { @class="form-control",type="date"})
+            @Html.ValidationMessageFor(m => m.Date, "", new { @class="text-danger"})
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-4">
+            <input type="button" class="btn btn-info btn-sm" onclick="save()" value="Tạo" />
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        </div>
+       
+    </div>
+</form>

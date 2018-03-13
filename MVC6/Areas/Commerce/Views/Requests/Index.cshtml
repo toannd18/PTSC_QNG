@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layoutadmin.cshtml";
+}
+@section style{
+    <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+}
+@section jfooter{
+
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.select.min.js"></script>
+    <script src="~/Scripts/js/trade/traderequest.js"></script>
+}
+<h3 class="blank1">Phiếu Đề Xuất</h3>
+<div class="bs-example4" data-example-id="simple-responsive-table">
+    <div class="table-responsive">
+        <div class="form-group">
+            <button class="btn btn-primary" onclick="getdetail(0)" data-toggle="tooltip" data-placement="bottom" title="Thêm"><span class="fa fa-plus-square-o"></span></button>
+            <button class="btn btn-warng1" onclick="getdata()" data-toggle="tooltip" data-placement="bottom" title="Sửa"><span class="fa fa-pencil-square-o"></span></button>
+            <button class="btn btn-danger" onclick="deletedata()" data-toggle="tooltip" data-placement="bottom" title="Xóa"><span class="fa fa-trash-o"></span></button>
+            <button class="btn btn-info" onclick="detailweb()" data-toggle="tooltip" data-placement="bottom" title="Chi tiết"><span class="fa fa-info-circle"></span></button>
+        </div>
+        <table class="table-bordered table-condensed" id="commercetable" style="font-family:'Times New Roman', Times, serif;font-size:11px">
+            <thead>
+                <tr>
+                    <th>Mã Đề Xuất</th>
+                    <th>Tên Đề Xuất</th>
+                    <th>Loại Đề Xuất</th>
+                    <th>Người Đề Xuất</th>
+                    <th>Ngày tạo</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+@Html.Partial("~/Views/Shared/_Modal.cshtml")

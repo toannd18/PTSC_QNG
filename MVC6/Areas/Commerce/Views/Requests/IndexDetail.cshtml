@@ -1,0 +1,115 @@
+﻿@model DataModel.Model.Trade.DeXuatModel
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layoutadmin.cshtml";
+}
+@section style{
+    <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+}
+@section jfooter{
+
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
+
+    <script src="~/Scripts/DataTables/dataTables.select.min.js"></script>
+    <script src="~/Scripts/js/trade/tradedetail.js"></script>
+}
+<div class="bs-example4" data-example-id="simple-responsive-table">
+    <input id="ma" type="hidden" value="@Model.Id" />
+    <div class="table-responsive">
+        <table style="width:70%;margin:auto" class="center">
+            <thead>
+                <tr>
+                    <th style="text-align:center;font-size:20px" colspan="2">Chi tiết phiếu đề xuất</th>
+                </tr>
+                <tr>
+                    <td style="text-align:center;padding-bottom:10px" colspan="2">Ngày lập @(Model.Ngay_Tao.HasValue ? Model.Ngay_Tao.Value.ToString("dd/MM/yyyy") : "")</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding-left:10px">Đề xuất số: @Model.Ma</td>
+                </tr>
+                <tr>
+                    <td style="padding-bottom:10px;padding-left:10px"> Nội dung đề xuất: @Model.Tieu_De</td>
+                    <td style="padding-bottom:10px">Loại đề xuất: @(Model.Kieu ? "Hàng hóa" : "Dịch vụ")</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold">Tiến độ mua hàng hóa:</td>
+                </tr>
+                <tr>
+                    <td style="padding-left:10px"> Ngày gửi hồ sơ mời chào giá: @(Model.Ngay_Gui.HasValue ? Model.Ngay_Gui.Value.ToString("dd/MM/yyyy") : "")</td>
+                </tr>
+                <tr>
+                    <td style="padding-left:10px"> Phê duyệt kết quả đánh giá: @(Model.Ngay_PD.HasValue ? Model.Ngay_PD.Value.ToString("dd/MM/yyyy") : "")</td>
+                </tr>
+                <tr>
+                    <td style="padding-left:10px"> Đàm phán ký kết hợp đồng:@(Model.Ngay_HD.HasValue ? Model.Ngay_HD.Value.ToString("dd/MM/yyyy") : "")</td>
+                </tr>
+                <tr>
+                    <td style="padding-left:10px;padding-bottom:10px"> Thực hiện hợp đồng:@(Model.Ngay_PHD.HasValue ? Model.Ngay_PHD.Value.ToString("dd/MM/yyyy") : "")</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold">Danh sách thành viên tổ đánh giá:</td>
+                </tr>
+                <tr>
+                    <td style="padding-left:10px"> Tổ trưởng: @Model.Ten_Dg</td>
+                </tr>
+                <tr>
+                    <td style="padding-left:10px"> Tổ phó: @Model.Ten_Dg1</td>
+                </tr>
+                <tr>
+                    <td style="padding-left:10px"> Tổ viên: @Model.Ten_Dg2</td>
+                </tr>
+                <tr>
+                    <td style="padding-left:10px"> Tổ viên: @Model.Ten_Dg3</td>
+                </tr>
+            </tbody>
+        </table>
+    </div><!-- /.table-responsive -->
+</div>
+<div class="bs-example4" data-example-id="contextual-table">
+    <div class="table-responsive">
+        <div class="form-group">
+            <a href="@("/Commerce/Requests/DetailNCC?Id=0&dx="+ @Model.Id) "class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Thêm"><span class="fa fa-plus-square-o"></span></a>
+            <button class="btn btn-warng1" onclick="getdata('/Commerce/Requests/GetDetail')" data-toggle="tooltip" data-placement="bottom" title="Sửa"><span class="fa fa-pencil-square-o"></span></button>
+            <button class="btn btn-danger" onclick="deletedata('/Commerce/Requests/DeleteDetail','table')" data-toggle="tooltip" data-placement="bottom" title="Xóa"><span class="fa fa-trash-o"></span></button>
+        </div>
+        <table class="table-bordered table-condensed" id="ncctable" style="font-family:'Times New Roman', Times, serif;font-size:11px">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên nhà cung cấp</th>
+                    <th>Đánh giá kỹ thuật</th>
+                    <th>Đánh giá thương mại</th>
+                    <th>Tổng đánh giá</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+<div class="panel-body1">
+    <div class="table-responsive">
+        <div class="form-group">
+            <button class="btn btn-primary" onclick="getdetail('/Commerce/Requests/GetDetail',0)" data-toggle="tooltip" data-placement="bottom" title="Thêm"><span class="fa fa-plus-square-o"></span></button>
+            <button class="btn btn-warng1" onclick="getdata('/Commerce/Requests/GetDetail')" data-toggle="tooltip" data-placement="bottom" title="Sửa"><span class="fa fa-pencil-square-o"></span></button>
+            <button class="btn btn-danger" onclick="deletedata('/Commerce/Requests/DeleteDetail','table')" data-toggle="tooltip" data-placement="bottom" title="Xóa"><span class="fa fa-trash-o"></span></button>
+        </div>
+        <table class="table-bordered table-condensed" id="marterialtable" style="font-family:'Times New Roman', Times, serif;font-size:11px">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Diễn giải</th>
+                    <th>Đơn vị tính</th>
+                    <th>Số lượng</th>
+                    <th>Ghi Chú</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+@Html.Partial("~/Views/Shared/_Modal.cshtml")

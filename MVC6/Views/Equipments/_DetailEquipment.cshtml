@@ -1,0 +1,39 @@
+﻿@model DataModel.Model.Systems.EquipmentModel
+   <form class="form-horizontal" id="equiptform">
+    @Html.HiddenFor(m => m.IsUpdate)
+       @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+       <div class="form-group">
+           @Html.LabelFor(model => model.Ma_TB, new { @class = "control-label col-md-2" })
+           <div class="col-md-10">
+               @Html.TextBoxFor(model => model.Ma_TB, new { @class = "form-control" })
+               @Html.ValidationMessageFor(model => model.Ma_TB, null, new { @class = "text-danger" })
+           </div>
+       </div>
+       <div class="form-group">
+           @Html.LabelFor(model => model.Ten_TB, new { @class = "control-label col-md-2" })
+           <div class="col-md-10">
+               @Html.TextBoxFor(model => model.Ten_TB, new { @class = "form-control" })
+               @Html.ValidationMessageFor(model => model.Ten_TB, null, new { @class = "text-danger" })
+           </div>
+       </div>
+       <div class="form-group">
+           @Html.LabelFor(model => model.Ma_NCC, new { @class = "control-label col-md-2" })
+           <div class="col-md-10">
+               @Html.DropDownListFor(model => model.Ma_NCC,ViewBag.Provider as SelectList,"--- Chọn ---", new { @class = "form-control" })
+               @Html.ValidationMessageFor(model => model.Ma_NCC, null, new { @class = "text-danger" })
+           </div>
+       </div>
+       <div class="form-group">
+           @Html.LabelFor(model => model.Cong_Suat, new { @class = "control-label col-md-2" })
+           <div class="col-md-10">
+               @Html.TextBoxFor(model => model.Cong_Suat, new { @class = "form-control" })
+               @Html.ValidationMessageFor(model => model.Cong_Suat, null, new { @class = "text-danger" })
+           </div>
+       </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-8">
+            <input type="button" class="btn btn-success" onclick="save()" value="Lưu" />
+            <input type="button" class="btn btn-primary" data-dismiss="modal" value="Đóng" />
+        </div>
+    </div>
+</form>

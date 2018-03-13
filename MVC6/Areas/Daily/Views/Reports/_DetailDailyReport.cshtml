@@ -1,0 +1,52 @@
+﻿@model DataModel.Model.DailyReport.DailyModel
+<form class="form-horizontal" id="dailyform">
+    @Html.HiddenFor(m=>m.Id)
+    @Html.HiddenFor(m=>m.DailyId)
+    <div class="form-group">
+        <label class="control-label col-md-2">Từ</label>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.FormTime, new { @class="form-control",type="time"})
+            @Html.ValidationMessageFor(m => m.FormTime, "", new { @class="text-danger"})
+        </div>
+        <label class="control-label col-md-2">Tới</label>
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.ToTime, new { @class = "form-control", type = "time" })
+            @Html.ValidationMessageFor(m => m.ToTime, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Nội dung</label>
+        <div class="col-md-10">
+            @Html.TextAreaFor(m => m.Content_Job, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Content_Job, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Loại Công Việc</label>
+        <div class="col-md-10">
+            @Html.DropDownListFor(m=>m.JobId,ViewBag.Job as SelectList,"--- Chọn ---", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.JobId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Phương Pháp Thực Hiện</label>
+        <div class="col-md-10">
+            @Html.TextAreaFor(m => m.Method, new { @class = "form-control"})
+            @Html.ValidationMessageFor(m => m.Method, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Kết quả</label>
+        <div class="col-md-10">
+            @Html.TextAreaFor(m => m.Result, new { @class = "form-control"})
+            @Html.ValidationMessageFor(m => m.Result, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        
+        <div class="col-md-offset-2 col-md-4">
+           <input type="button" class="btn btn-primary" onclick="save()" value="Lưu" />
+           <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        </div>
+    </div>
+</form>

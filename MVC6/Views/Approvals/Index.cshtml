@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layoutadmin.cshtml";
+}
+
+@section style{
+    <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+}
+@section jfooter{
+
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
+    <script src="~/Scripts/js/application/approval.js"></script>
+}
+<h3 class="blank1">Danh Mục Cần Phê Duyệt</h3>
+<div class="bs-example4" data-example-id="simple-responsive-table">
+    <div class="table-responsive">
+        <table class="table-bordered table-striped" id="approtbl" style="width:100%;font-family:'Times New Roman', Times, serif;font-size:11px">
+            <thead>
+                <tr>
+                    <th>Mã Phiếu Yêu Cầu</th>
+                    <th>Bộ Phận Kiểm Tra</th>
+                    <th>Địa Điểm Kiểm Tra</th>
+                    <th>Thời Gian Kiểm Tra</th>
+                    <th>Người Tạo</th>
+                    <th>Tình Trạng</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div><!-- /.table-responsive -->
+</div>
+<!-- Modal -->
+@Html.Partial("~/Views/Shared/_Modal.cshtml")
+

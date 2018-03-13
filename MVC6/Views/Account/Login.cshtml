@@ -1,0 +1,108 @@
+﻿@model DataModel.Model.Systems.AccountModel
+@{
+    Layout = null;
+    ViewBag.ReturnUrl = Request["ReturnUrl"];
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Đăng Nhập | Sign In :: w3layouts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Easy Admin Panel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- Bootstrap Core CSS -->
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <!-- Graph CSS -->
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    <!-- jQuery -->
+    <!-- lined-icons -->
+
+    <link href="~/Content/icon-font.min.css" rel="stylesheet" />
+    <!-- //lined-icons -->
+    <!-- chart -->
+
+    <!-- //chart -->
+    <!--animate-->
+
+    <link href="~/Content/animate.css" rel="stylesheet" />
+
+    <script src="~/Scripts/asset/wow.min.js"></script>
+    <script>
+		 new WOW().init();
+    </script>
+    <!--//end-animate-->
+    <!----webfonts--->
+    <link href='//fonts.googleapis.com/css?family=Cabin:400,400italic,500,500italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
+    <!---//webfonts--->
+    <!-- Meters graphs -->
+
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <!-- Placed js at the end of the document so the pages load faster -->
+
+</head>
+
+<body class="sign-in-up">
+    <section>
+        <div id="page-wrapper" class="sign-in-wrapper">
+            <div class="graphs">
+                <div class="sign-in-form">
+                    <div class="sign-in-form-top">
+                        <p><span>Đăng Nhập</span> <a href="index.html">Admin</a></p>
+                    </div>
+                    @using (Html.BeginForm())
+                    {
+                        
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="log-input">
+                                <div class="log-input">
+                                    <input type="text" name="Name" class="user" placeholder="Nhập Tài Khoản" />
+                                </div>
+                                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                                <div class="clearfix"> </div>
+                            </div>
+                            <div class="log-input">
+                                <div class="log-input">
+                                    <input type="Password" name="Password" class="lock" placeholder="Nhập Mật Khẩu" />
+                                </div>
+                                <div class="clearfix"> </div>
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="log-input">
+                                <div class="log-input-left">
+                                    @Html.CheckBoxFor(m => m.Remember)
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+
+                            <input type="submit" value="Đăng Nhập">
+
+
+                        
+                    }
+                        
+                    </div>
+                   
+                </div>
+            </div>
+
+        <!--footer section start-->
+        <footer>
+            <p>&copy 2015 Easy Admin Panel. All Rights Reserved | Design by <a href="https://w3layouts.com/" target="_blank">w3layouts.</a></p>
+        </footer>
+        <!--footer section end-->
+    </section>
+    <script src="~/Scripts/asset/jquery.nicescroll.js"></script>
+
+    <script src="~/Scripts/asset/scripts.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/Scripts/bootbox.min.js"></script>
+</body>
+</html>

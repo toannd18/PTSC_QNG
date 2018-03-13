@@ -1,0 +1,350 @@
+﻿<!DOCTYPE HTML>
+@using Data.Data;
+@{ 
+    AppUser model = new AppUser();
+    if (Request.IsAuthenticated)
+    {
+        model = new EFDbContext().AppUsers.Where(m => m.UserName.Equals(HttpContext.Current.User.Identity.Name)).FirstOrDefault();
+    }
+
+}
+<html>
+<head>
+    <title>@ViewData["Title"]-PTSC Quảng Ngãi | Blank Page :: w3layouts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Easy Admin Panel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- Bootstrap Core CSS -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <!-- Graph CSS -->
+
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+
+    <!-- jQuery -->
+    <!-- lined-icons -->
+    <link href="~/Content/icon-font.min.css" rel="stylesheet" />
+
+    <!-- //lined-icons -->
+    <!-- chart -->
+    <script src="~/Scripts/asset/Chart.js"></script>
+   
+    <!-- //chart -->
+    <!--animate-->
+    <link href="~/Content/animate.css" rel="stylesheet" />
+
+    <script src="~/Scripts/asset/wow.min.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+    <!--//end-animate-->
+    <!----webfonts--->
+    <link href='//fonts.googleapis.com/css?family=Cabin:400,400italic,500,500italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
+    <!---//webfonts--->
+    <!-- Meters graphs -->
+    @RenderSection("style", required: false)
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+   
+
+
+    
+    <!-- Placed js at the end of the document so the pages load faster -->
+    <link rel="icon" href="~/images/Icon.jpg" sizes="32x32">
+
+</head>
+<body class="sticky-header left-side-collapsed">
+    <section>
+        <!-- left side start-->
+        <div class="left-side sticky-left-side">
+
+            <!--logo and iconic logo start-->
+            <div class="logo">
+                <h1><a href="index.html">Easy <span>Admin</span></a></h1>
+            </div>
+            <div class="logo-icon text-center">
+                <a href="/Home"><i class="lnr lnr-home"></i> </a>
+            </div>
+            <!--logo and iconic logo end-->
+            <div class="left-side-inner">
+                <!--sidebar nav start-->
+                @{Html.RenderAction("GetAllMenu", "Functions", new { area = "" });}
+                <!--sidebar nav end-->
+            </div>
+        </div>
+        <!-- left side end-->
+        <!-- main content start-->
+        <div class="main-content main-content2 main-content2copy">
+            <!-- header-starts -->
+            <div class="header-section">
+
+                <!--toggle button start-->
+                <a class="toggle-btn  menu-collapsed"><i class="fa fa-bars"></i></a>
+                <!--toggle button end-->
+                <!--notification menu start -->
+                <div class="menu-right">
+                    <div class="user-panel-top">
+                        <div class="profile_details_left">
+                            <ul class="nofitications-dropdown">
+                                @*<li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-envelope"></i><span class="badge">3</span></a>
+
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <div class="notification_header">
+                                                    <h3>You have 3 new messages</h3>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <div class="user_img"><img src="images/1.png" alt=""></div>
+                                                    <div class="notification_desc">
+                                                        <p>Lorem ipsum dolor sit amet</p>
+                                                        <p><span>1 hour ago</span></p>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </a>
+                                            </li>
+                                            <li class="odd">
+                                                <a href="#">
+                                                    <div class="user_img"><img src="images/1.png" alt=""></div>
+                                                    <div class="notification_desc">
+                                                        <p>Lorem ipsum dolor sit amet </p>
+                                                        <p><span>1 hour ago</span></p>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <div class="user_img"><img src="images/1.png" alt=""></div>
+                                                    <div class="notification_desc">
+                                                        <p>Lorem ipsum dolor sit amet </p>
+                                                        <p><span>1 hour ago</span></p>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <div class="notification_bottom">
+                                                    <a href="#">See all messages</a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="login_box" id="loginContainer">
+                                        <div class="search-box">
+                                            <div id="sb-search" class="sb-search">
+                                                <form>
+                                                    <input class="sb-search-input" placeholder="Enter your search term..." type="search" id="search">
+                                                    <input class="sb-search-submit" type="submit" value="">
+                                                    <span class="sb-icon-search"> </span>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- search-scripts -->
+                                        <script src="~/Scripts/asset/classie.js"></script>
+
+                                        <script src="~/Scripts/asset/uisearch.js"></script>
+
+                                        <script>
+                                            new UISearch(document.getElementById('sb-search'));
+                                        </script>
+                                        <!-- //search-scripts -->
+                                    </li>*@
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell"></i><span class="badge blue" id="count"></span></a>
+                                    <ul class="dropdown-menu" id="Notification"></ul>
+                                </li>
+                                @*<li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-tasks"></i><span class="badge blue1">22</span></a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <div class="notification_header">
+                                                    <h3>You have 8 pending task</h3>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <div class="task-info">
+                                                        <span class="task-desc">Database update</span><span class="percentage">40%</span>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                    <div class="progress progress-striped active">
+                                                        <div class="bar yellow" style="width:40%;"></div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <div class="task-info">
+                                                        <span class="task-desc">Dashboard done</span><span class="percentage">90%</span>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+
+                                                    <div class="progress progress-striped active">
+                                                        <div class="bar green" style="width:90%;"></div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <div class="task-info">
+                                                        <span class="task-desc">Mobile App</span><span class="percentage">33%</span>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                    <div class="progress progress-striped active">
+                                                        <div class="bar red" style="width: 33%;"></div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <div class="task-info">
+                                                        <span class="task-desc">Issues fixed</span><span class="percentage">80%</span>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                    <div class="progress progress-striped active">
+                                                        <div class="bar  blue" style="width: 80%;"></div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <div class="notification_bottom">
+                                                    <a href="#">See all pending task</a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>*@
+
+                            </ul>
+                        </div>
+                        @Html.Partial("_PartialLogin", model)
+
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <!--notification menu end -->
+            </div>
+
+            <!-- //header-ends -->
+            <div id="page-wrapper">
+                <div class="graphs">
+                    @RenderBody()
+                </div>
+            </div>
+
+            <!--footer section start-->
+            <footer>
+                <p>&copy 2015 Easy Admin Panel. All Rights Reserved | Design by <a href="https://w3layouts.com/" target="_blank">w3layouts.</a></p>
+            </footer>
+            <!--footer section end-->
+        </div>
+    </section>
+
+
+    <script src="~/Scripts/asset/jquery.nicescroll.js"></script>
+
+    <script src="~/Scripts/asset/scripts.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/bootbox.min.js"></script>
+    <script src="~/Scripts/notify.min.js"></script>
+
+    <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+    <script src="/signalr/hubs"></script>
+
+    <!--Signalr Hub connection get Notification-->
+    <script>
+        $(document).ready(function () {
+
+            var hub = $.connection.notificationHub;
+
+            hub.client.displayStatus = function () {
+
+                getnotification();
+                pushNotification($("#count").text());
+            };
+            $.connection.hub.start();
+            if (Notification.permission === "default") {
+                Notification.requestPermission();
+            };
+            getnotification();
+            function getnotification() {
+                var divNotification = $("#Notification");
+                $.ajax({
+                    url: '/Home/GetNotification',
+                    type: 'Get',
+                    success: function (data) {
+
+                        divNotification.empty();
+                        $("#count").text("");
+                        if (data.length > 0) {
+                            divNotification.append('<li><div class="notification_header" >' +
+                                '<h3 >Bạn có ' + data.length + ' thông báo</h3></div ></li>');
+                            $("#count").text(data.length);
+                            for (var i = 0; i < data.length; i++) {
+                                var notification = ' <li">' +
+                                    '<a href= "' + data[i].Url + '" >' +
+                                    '<div class="notification_desc">' +
+                                    '<p>' + data[i].Notification + '</p>' +
+                                    '<p><span>' + moment(data[i].Date).format("DD/MM/YYYY HH:mm") + '</span></p>' +
+                                    '</div>' +
+                                    '<div class="clearfix"></div></a></li>';
+                                divNotification.append(notification);
+                                if (i === 2) {
+
+                                    break;
+                                }
+                            };
+
+                        } else {
+                            var notification = ' <li">' +
+                                '<a href= "#" >' +
+                                '<div class="notification_desc">' +
+                                '<p> Chưa có tinh nhắn mới</p>' +
+
+                                '</div>' +
+                                '<div class="clearfix"></div></a></li>';
+                            divNotification.append(notification);
+                        }
+                        var notification = '<li>' +
+                            '<div class="notification_bottom">' +
+                            '<a href="/Home/Notification">Xem tất cả tin nhắn</a>'
+                        '</div>' +
+                            '</li>';
+                        divNotification.append(notification);
+                    }
+                })
+            }
+        });
+        function pushNotification(data) {
+           if (Notification.permission === "granted") {
+                if (parseInt(data) > 0) {
+                    var notifi =new Notification("Thông báo", {
+
+                        body: $("#Notification p:first").text()+ " Ngày gửi " + $("#Notification span:first").text(),
+                        icon: "/images/Icon.jpg",
+                    });
+                    notifi.onclick = function () {
+
+                        window.open("/Home/Notification");
+                    };
+                }
+            }
+
+        }
+    </script>
+
+    <script src="~/Scripts/moment.min.js"></script>
+
+    @RenderSection("jfooter", required: false)
+    <script src="~/Scripts/datetime-moment.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<DataModel.Model.Systems.PermissionModel>
+@Html.Hidden("FunctionId")
+<form id="permissionform">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Tên Quyền
+                </th>
+                <th>
+                    Quyền Được Làm
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => item.AppRole.Description)
+                        @Html.HiddenFor(m => item.RoleId, new { @Name = "RoleId" })
+                    </td>
+                    <td>
+                        @*<div class="checkbox-inline1"><label>@Html.CheckBoxFor(m=>item.CanRead) Xem</label></div>
+                            <div class="checkbox-inline1"><label>@Html.CheckBoxFor(m => item.CanDelete) Xóa</label></div>
+                            <div class="checkbox-inline1"><label>@Html.CheckBoxFor(m => item.CanUpdate) Sửa</label></div>
+                            <div class="checkbox-inline1"><label>@Html.CheckBoxFor(m => item.CanCreate) Tạo</label></div>*@
+                        <div class="checkbox-inline1"><label><input type="checkbox" name="CanRead" value="true" @(!item.CanRead ? "" : "checked")> Xem</label></div>
+                        <div class="checkbox-inline1"><label><input type="checkbox" name="CanCreate" value="true" @(!item.CanCreate ? "" : "checked")>Thêm</label></div>
+                        <div class="checkbox-inline1"><label><input type="checkbox" name="CanUpdate" value="true" @(!item.CanUpdate ? "" : "checked")>Sửa</label></div>
+                        <div class="checkbox-inline1"><label><input type="checkbox" name="CanDelete" value="true" @(!item.CanDelete ? "" : "checked")> Xóa</label></div>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+
+    </table>
+    <div class="form-group">
+        <div class="col-md-offset-8">
+            <input type="button" class="btn btn-success btn-sm" onclick="savepermission()" value="Cập Nhật" />
+            <input type="button" class="btn btn-primary" data-dismiss="modal" value="Hủy Bỏ" />
+            
+           
+        </div>
+    </div>
+    
+</form>

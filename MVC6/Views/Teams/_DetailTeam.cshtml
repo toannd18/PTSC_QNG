@@ -1,0 +1,31 @@
+﻿@model DataModel.Model.Systems.TeamModel
+<form class="form-horizontal" id="teamform">
+    @Html.HiddenFor(m => m.isUpdate)
+    <div class="form-group">
+        <label class="col-md-2 control-label">Mã Tổ</label>
+        <div class="col-md-8">
+            @Html.TextBoxFor(m=>m.Ma_TO, new { @class = "form-control", placeholder = "Nhập Dữ Liệu" })
+            @Html.ValidationMessageFor(m => m.Ma_TO, null, new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Tên Tổ</label>
+        <div class="col-md-8">
+            @Html.TextBoxFor(m => m.Ten_TO, new { @class = "form-control", placeholder = "Nhập Dữ Liệu" })
+            @Html.ValidationMessageFor(m => m.Ten_TO, null, new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Tên Phòng Ban</label>
+        <div class="col-md-8">
+            @Html.DropDownListFor(m => m.Ma_BP,ViewBag.Dept as SelectList,"--- Chọn ---", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Ma_BP, null, new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-8">
+            <input type="button" class="btn btn-success btn-sm" onclick="savedata()" value="Lưu" />
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        </div>
+    </div>
+</form>

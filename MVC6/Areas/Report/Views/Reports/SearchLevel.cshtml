@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "SearchLevel";
+    Layout = "~/Views/Shared/_Layoutadmin.cshtml";
+}
+
+@section style{
+    <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+}
+@section jfooter{
+
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
+    <script src="~/Scripts/js/reports/searchlevel.js"></script>
+}
+
+    <div class="bs-example4" data-example-id="simple-responsive-table">
+        <table>
+            <tr>
+                <td>Từ</td>
+                <td style="padding-left:10px"><input type="date" class="form-control" id="FromTime" /></td>
+                <td style="padding-left:10px">Đến</td>
+                <td style="padding-left:10px"><input type="date" class="form-control" id="ToTime" /></td>
+                @if (ViewBag.Check == 0)
+                {
+                <td style="padding-left:10px">Tổ</td>
+                <td style="padding-left:10px">@Html.DropDownList("MaTo", ViewBag.To as SelectList, "-- Tất cả --", new { @class = "form-control" })</td>
+                }
+                <td style="padding-left:10px"> <button class="btn btn-primary" onclick="search()">Tìm Kiếm</button></td>
+            </tr>
+        </table>
+        <br />
+        
+        <div class="table-responsive">
+            <table class="cell-border table-striped table-bordered" id="searchtbl" style="font-family:'Times New Roman', Times, serif;font-size:11px">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Họ và tên</th>
+                        <th>Tổ chuyên môn</th>
+                        <th>Mức 1</th>
+                        <th>Mức 2</th>
+                        <th>Mức 3</th>
+                        <th>Mức 4</th>
+                        <th>Mức 5</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div><!-- /.table-responsive -->
+    </div>
+

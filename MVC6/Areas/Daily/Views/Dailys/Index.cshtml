@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layoutadmin.cshtml";
+}
+@section style{
+    <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+}
+@section jfooter{
+
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
+    <script src="~/Scripts/js/dailys/daily.js"></script>
+  
+}
+<h3 class="blank1">Danh Mục Đề XUất</h3>
+
+<div class="bs-example4" data-example-id="simple-responsive-table">
+    <div class="table-responsive">
+    @if (ViewBag.Check==2)
+    {
+        <div class="row">
+            <div class="col-md-10 " >
+                <label class="col-md-5">Tổ @Html.DropDownList("MaTo", ViewBag.TO as SelectList, "-- Tất cả --", new { @class = "form-control", style = "display:unset;width:70%" })</label>
+            </div>
+            
+        </div>
+    }
+    else if (ViewBag.Check==1)
+    {
+        <div class="row">
+            <div class="col-md-10 " style="padding-left:unset">
+                <label class="col-md-4">Phòng @Html.DropDownList("MaPhong", ViewBag.Dept as SelectList, "-- Tất cả --", new { @class = "form-control", style = "display:unset;width:70%" })</label>
+
+                <label class="col-md-4">Tổ @Html.DropDownList("MaTo", ViewBag.TO as SelectList, "-- Tất cả --", new { @class = "form-control", style = "display:unset;width:70%" })</label>
+            </div>
+        </div>
+    }
+        <table class="table-striped table-bordered"  id="dailytbl" style="font-family:'Times New Roman', Times, serif;font-size:11px;">
+            <thead>
+                <tr>
+                    <th>Thời Gian</th>
+                    <th>Họ và Tên</th>
+                    <th>Tổng kết các công việc chính</th>
+                    <th>Tổ trưởng/phụ trách tổ</th>
+                    <th>Phụ trách trực tiếp</th>
+                    <th>Trưởng Bộ Phận</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div><!-- /.table-responsive -->
+</div>
+<!-- Modal -->
+
+

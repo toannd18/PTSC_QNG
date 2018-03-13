@@ -1,0 +1,65 @@
+﻿@model DataModel.Model.Systems.ProviderModel
+
+<form class="form-horizontal" id="providerform">
+    @Html.HiddenFor(m => m.IsUpdate)
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Ma_NCC, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Ma_NCC, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Ma_NCC, null, new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Ten_NCC, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Ten_NCC, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Ten_NCC, null, new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("Địa Chỉ", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Dia_Chi, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Dia_Chi, null, new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("Số Điện Thoại", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Tel, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Tel, null, new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("Số Fax", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Fax, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Fax, null, new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("Người liên hệ", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Attn, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Attn, null, new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("Email", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Email, null, new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="button" value="Lưu" class="btn btn-success" onclick="save()" />
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        </div>
+    </div>
+
+</form>
+
+

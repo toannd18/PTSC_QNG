@@ -1,0 +1,325 @@
+﻿@model DataModel.Model.Applications.RequestModel
+@{
+    ViewBag.Title = "Danh Sách Kiểm Tra";
+    Layout = "~/Views/Shared/_Layoutadmin.cshtml";
+}
+@section style{
+    <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<style>
+    .ui-autocomplete-loading {
+        background: white url("../../images/ui-anim_basic_16x16.gif") right center no-repeat;
+    }
+</style>
+}
+@section jfooter{
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
+
+    <script src="~/Scripts/js/application/appcheck.js"></script>
+}
+<h3 class="blank1">Danh Mục Kiểm Tra</h3>
+
+<div class="bs-example4" data-example-id="simple-responsive-table">
+
+    <div class="well" style="font-size:unset">
+        @Html.HiddenFor(m => m.Id)
+        
+        <table style="margin:auto;display:block;width:50%">
+            <thead>
+                <tr>
+                    <th  style="text-align:center;padding-bottom:30px" colspan="2">Phiếu Yêu Cầu Kiểm Tra Chất Lượng Hàng Hóa</th>
+                </tr>
+            </thead>
+            <tr>
+                <td style="width:40%">
+                    Mã Số Phiếu
+                </td>
+                <td>
+                    @Html.DisplayTextFor(m => m.LateId)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Bộ Phận Mời Kiểm Tra
+                </td>
+                <td>
+                    @Html.DisplayTextFor(m => m.Ten_BP)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Địa Điểm Kiểm Tra
+                </td>
+                <td>
+                    @Html.DisplayFor(m => m.Dia_Diem)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Thời Gian Kiểm Tra
+                </td>
+                <td>
+                    @Html.DisplayFor(m => m.Date)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Hạng Mục Kiểm Tra
+                </td>
+                <td>
+                    @Html.DisplayFor(m => m.Hang_Muc)
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" style="height:50px">
+                    <strong>Tài Liệu Đính Kèm</strong>
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    1  Hợp Đồng
+                </td>
+                <td>
+                    @if (string.IsNullOrEmpty(Model.HopDong))
+                {
+                    <input type="checkbox" disabled />
+            }
+            else
+            {
+                <input type="checkbox" disabled checked />
+        }
+                    @Html.DisplayTextFor(m => m.HopDong)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    2  Phiếu đề xuất
+                </td>
+                <td>
+                    @if (string.IsNullOrEmpty(Model.DeXuat))
+                {
+                    <input type="checkbox" disabled />
+            }
+            else
+            {
+                <input type="checkbox" disabled checked />
+        }
+                    @Html.DisplayFor(m => m.DeXuat)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    3  CO
+                </td>
+                <td>
+                    @Html.DisplayFor(m => m.CO)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    4  CQ
+                </td>
+                <td>
+                    @Html.DisplayFor(m => m.CQ)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    5  Khác
+                </td>
+                <td>
+                    @Html.DisplayFor(m => m.Other)
+
+                    @Html.DisplayTextFor(m => m.Note)
+                </td>
+            </tr>
+        </table>
+        @*<div class="col-md-offset-2">
+            @Html.HiddenFor(m => m.Id)
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-md-2" style="text-align:left;padding-top:unset">Mã Số Phiếu</label>
+                    <div class="col-md-10">
+                        @Html.DisplayTextFor(m => m.LateId)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2" style="text-align:left;padding-top:unset">Bộ Phận Mời Kiểm Tra</label>
+                    <div class="col-md-10">
+                        @Html.DisplayTextFor(m => m.Ten_BP)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2" style="text-align:left;padding-top:unset">Địa Điểm Kiểm Tra</label>
+                    <div class="col-md-10">
+                        @Html.DisplayFor(m => m.Dia_Diem)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2" style="text-align:left;padding-top:unset">Thời Gian Kiểm Tra</label>
+                    <div class="col-md-10">
+                        @Html.DisplayFor(m => m.Date)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2" style="text-align:left;padding-top:unset">Hạng Mục Kiểm Tra</label>
+                    <div class="col-md-10">
+                        @Html.DisplayFor(m => m.Hang_Muc)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2" style="text-align:left;padding-top:unset"><b>Tài Liệu Đính Kèm</b></label>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2" style="text-align:left;padding-top:unset">1  Hợp Đồng</label>
+                    <div class="col-md-10">
+                        <div class="checkbox-inline">
+                            @if (string.IsNullOrEmpty(Model.HopDong))
+                            {
+                                <input type="checkbox" disabled />
+                            }
+                            else
+                            {
+                                <input type="checkbox" disabled checked />
+                            }
+                            @Html.DisplayFor(m => m.HopDong)
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2" style="text-align:left;padding-top:unset">2  Phiếu đề xuất</label>
+                    <div class="col-md-10">
+                        <div class="checkbox-inline">
+                            @if (string.IsNullOrEmpty(Model.DeXuat))
+                            {
+                                <input type="checkbox" disabled />
+                            }
+                            else
+                            {
+                                <input type="checkbox" disabled checked />
+                            }
+                            @Html.DisplayFor(m => m.DeXuat)
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2" style="text-align:left;padding-top:unset">3  CO</label>
+                    <div class="col-md-10">
+                        @Html.DisplayFor(m => m.CO)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2" style="text-align:left;padding-top:unset">4  CQ</label>
+                    <div class="col-md-10">
+                        @Html.DisplayFor(m => m.CQ)
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2" style="text-align:left;padding-top:unset">5  Khác</label>
+                    <div class="col-md-10">
+                        <div class="checkbox-inline">
+                            <label>
+                                @Html.DisplayFor(m => m.Other)
+
+                                @Html.DisplayFor(m => m.Note)
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+
+
+        </div>*@
+
+
+    </div>
+   
+    <div class="form-group">
+        <button class="btn btn-primary" onclick="showmodal()"><span class="fa fa-envelope-o"> Gửi Phản Hồi</span></button>
+        <button class="btn btn-warng1" data-toggle="modal" data-target="#modalemail"><span class="fa fa-envelope-o"> Chuyển Yêu Cầu</span></button>
+        @Html.ActionLink("Exprot to Excel","ExportExcel","Approvals", new { ma = @Model.Id }, new{type="Button",@class="btn btn-sm btn-info" })
+    </div>
+    <div class="table-responsive">
+        <table class="display nowrap table-striped table-bordered" id="checktbl" style="vertical-align:central;font-family:'Times New Roman', Times, serif;font-size:11px">
+            <thead>
+                <tr>
+                    <th rowspan="2" style="vertical-align:middle">STT</th>
+                    <th rowspan="2" style="vertical-align:middle">Số PĐX</th>
+                    <th rowspan="2" style="vertical-align:middle">HĐ/ĐĐH</th>
+                    <th rowspan="2" style="vertical-align:middle">Tên Nhà Cung Cấp</th>
+                    <th rowspan="2" style="vertical-align:middle">Tên Hàng Hóa</th>
+                    <th colspan="2">Đặc điểm kỹ thuật</th>
+                    <th colspan="3">Số Lượng</th>
+                    <th colspan="6">Hồ Sơ Kèm Theo</th>
+                    <th rowspan="2" style="vertical-align:middle">Kết Luận</th>
+                    <th rowspan="2" style="vertical-align:middle">#</th>
+                </tr>
+                <tr>
+                    <th>Yêu Cầu</th>
+                    <th>Thực Tế</th>
+                    <th>Yêu Cầu</th>
+                    <th>Thực Tế</th>
+                    <th>Đơn Vị</th>
+                    <th>CO</th>
+                    <th>CQ</th>
+                    <th>MTR</th>
+                    <th>S/N</th>
+                    <th>P/N</th>
+                    <th>Khác</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div><!-- /.table-responsive -->
+</div>
+@Html.Partial("SendEmail")
+<!-- Modal -->
+@Html.Partial("~/Views/Shared/_Modal.cshtml")
+
+<div class="modal fade" id="modalreponse" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Gửi Phiếu Yêu Cầu</h4>
+            </div>
+            <div class="">
+                <br />
+                <form class="form-horizontal" id="formemail">
+                    <div class="form-group">
+                        <label class="control-label col-md-2">File đính kèm</label>
+                        <div class="col-md-10">
+                            <input type="file" id="filename" class="form-control" accept=".pdf" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Kết luận</label>
+                        <div class="col-md-10">
+                            <select class="form-control" id="code">
+                               
+                                <option value="A">Chấp nhận</option>
+                                <option value="R">Từ chối</option>
+                                <option value="W">Thực tế</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="col-md-offset-2">
+                    <input type="button" class="btn btn-primary" onclick="sendemail(@Model.Id)" value="Gửi" />
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Đóng">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
