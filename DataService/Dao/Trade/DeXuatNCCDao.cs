@@ -1,10 +1,7 @@
 ﻿using Data.Data;
 using DataModel.Model.Trade;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataService.Dao.Trade
 {
@@ -12,16 +9,19 @@ namespace DataService.Dao.Trade
     {
         private readonly EFDbContext db;
         private tbl_DG_NCC tbl;
+
         public DeXuatNCCDao()
         {
             db = new EFDbContext();
             tbl = new tbl_DG_NCC();
         }
+
         public IList<DGNCCModel> Load(int ma)
 
         {
             var model = (from n in db.tbl_NCC
                          join d in db.tbl_DG_NCC on n.Ma_NCC equals d.Ma_NCC
+                         where d.DeXuatId==ma
                          select (new DGNCCModel
                          {
                              Id = d.Id,
@@ -34,6 +34,7 @@ namespace DataService.Dao.Trade
                          })).OrderBy(m => m.Ma_NCC).ToList();
             return model;
         }
+
         public DGNCCModel Detail(int Id)
         {
             return db.tbl_DG_NCC.Where(m => m.Id == Id).Select(m => new DGNCCModel
@@ -46,6 +47,7 @@ namespace DataService.Dao.Trade
                 DG = m.DG
             }).FirstOrDefault();
         }
+
         public bool SaveNCC(DGNCCModel m)
         {
             try
@@ -61,12 +63,12 @@ namespace DataService.Dao.Trade
                 return false;
             }
         }
+
         public bool UpdateNCC(DGNCCModel m)
         {
             try
             {
                 tbl = db.tbl_DG_NCC.Find(m.Id);
-                
                 tbl.Ma_NCC = m.Ma_NCC;
                 db.SaveChanges();
                 return true;
@@ -76,6 +78,7 @@ namespace DataService.Dao.Trade
                 return false;
             }
         }
+
         public bool DeleteNCC(int Id)
         {
             try

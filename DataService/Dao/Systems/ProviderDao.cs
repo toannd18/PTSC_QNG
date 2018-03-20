@@ -1,20 +1,19 @@
 ﻿using Data.Data;
 using DataModel.Model.Systems;
-
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace DataService.Dao.Systems
 {
-	public class ProviderDao
-	{
+    public class ProviderDao
+    {
         private readonly EFDbContext db;
+
         public ProviderDao()
         {
             db = new EFDbContext();
         }
+
         public List<tbl_NCC> load()
         {
             return db.tbl_NCC.OrderBy(m => m.Ma_NCC).ToList();
@@ -26,14 +25,18 @@ namespace DataService.Dao.Systems
             {
                 Ma_NCC = ma,
                 Ten_NCC = m.Ten_NCC,
-                Dia_Chi=m.Dia_Chi,
-                Tel=m.Tel,
-                Fax=m.Fax,
-                Attn=m.Attn,
-                Email=m.Email
+                Dia_Chi = m.Dia_Chi,
+                Tel = m.Tel,
+                Fax = m.Fax,
+                Attn = m.Attn,
+                Email = m.Email,
+                Hang_Hoa = m.Hang_Hoa,
+                Dich_Vu = m.Dich_Vu,
+                Diem = m.Diem
             }).FirstOrDefault();
             return tbl;
         }
+
         public bool Save(ProviderModel model)
         {
             try
@@ -46,6 +49,8 @@ namespace DataService.Dao.Systems
                 tbl.Fax = model.Fax;
                 tbl.Attn = model.Attn;
                 tbl.Email = model.Email;
+                tbl.Hang_Hoa = model.Hang_Hoa;
+                tbl.Dich_Vu = model.Dich_Vu;
                 db.tbl_NCC.Add(tbl);
                 db.SaveChanges();
                 return true;
@@ -55,6 +60,7 @@ namespace DataService.Dao.Systems
                 return false;
             }
         }
+
         public bool Update(ProviderModel model)
         {
             try
@@ -66,6 +72,8 @@ namespace DataService.Dao.Systems
                 tbl.Fax = model.Fax;
                 tbl.Attn = model.Attn;
                 tbl.Email = model.Email;
+                tbl.Hang_Hoa = model.Hang_Hoa;
+                tbl.Dich_Vu = model.Dich_Vu;
                 db.SaveChanges();
                 return true;
             }
@@ -74,6 +82,7 @@ namespace DataService.Dao.Systems
                 return false;
             }
         }
+
         public bool Delete(string ma)
         {
             tbl_NCC tbl = db.tbl_NCC.Find(ma);
@@ -81,5 +90,5 @@ namespace DataService.Dao.Systems
             db.SaveChanges();
             return true;
         }
-	}
+    }
 }

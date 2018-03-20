@@ -523,7 +523,8 @@
     <Content Include="Areas\Commerce\Views\Requests\_DetailTradeRequest.cshtml" />
     <Content Include="Areas\Commerce\Views\Requests\IndexDetail.cshtml" />
     <Content Include="Areas\Commerce\Views\Requests\_DetailMarterial.cshtml" />
-    <Content Include="Areas\Commerce\Views\Requests\DetailNCC.cshtml" />
+    <Content Include="Areas\Commerce\Views\Requests\_ListNCC.cshtml" />
+    <Content Include="Areas\Commerce\Views\Requests\_DetailCommerce.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <Content Include="Reports\PhieuKiemTra.xlsx" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />

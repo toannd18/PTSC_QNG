@@ -76,6 +76,7 @@
     <Compile Include="Dao\Trade\DeXuatChiTietDao.cs" />
     <Compile Include="Dao\Trade\DeXuatDao.cs" />
     <Compile Include="Dao\Trade\DeXuatNCCDao.cs" />
+    <Compile Include="Dao\Trade\DeXuatTMDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -70,12 +70,13 @@
         </table>
     </div><!-- /.table-responsive -->
 </div>
+
+<!--Nhà cung cấp-->
 <div class="bs-example4" data-example-id="contextual-table">
     <div class="table-responsive">
         <div class="form-group">
-            <a href="@("/Commerce/Requests/DetailNCC?Id=0&dx="+ @Model.Id) "class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Thêm"><span class="fa fa-plus-square-o"></span></a>
-            <button class="btn btn-warng1" onclick="getdata('/Commerce/Requests/GetDetail')" data-toggle="tooltip" data-placement="bottom" title="Sửa"><span class="fa fa-pencil-square-o"></span></button>
-            <button class="btn btn-danger" onclick="deletedata('/Commerce/Requests/DeleteDetail','table')" data-toggle="tooltip" data-placement="bottom" title="Xóa"><span class="fa fa-trash-o"></span></button>
+            <button class="btn btn-primary" onclick="loadncc()" data-toggle="tooltip" data-placement="bottom" title="Thêm"><span class="fa fa-plus-square-o"></span></button>
+            <button class="btn btn-danger" onclick="deletencc()" data-toggle="tooltip" data-placement="bottom" title="Xóa"><span class="fa fa-trash-o"></span></button>
         </div>
         <table class="table-bordered table-condensed" id="ncctable" style="font-family:'Times New Roman', Times, serif;font-size:11px">
             <thead>
@@ -91,25 +92,99 @@
         </table>
     </div>
 </div>
-<div class="panel-body1">
-    <div class="table-responsive">
-        <div class="form-group">
-            <button class="btn btn-primary" onclick="getdetail('/Commerce/Requests/GetDetail',0)" data-toggle="tooltip" data-placement="bottom" title="Thêm"><span class="fa fa-plus-square-o"></span></button>
-            <button class="btn btn-warng1" onclick="getdata('/Commerce/Requests/GetDetail')" data-toggle="tooltip" data-placement="bottom" title="Sửa"><span class="fa fa-pencil-square-o"></span></button>
-            <button class="btn btn-danger" onclick="deletedata('/Commerce/Requests/DeleteDetail','table')" data-toggle="tooltip" data-placement="bottom" title="Xóa"><span class="fa fa-trash-o"></span></button>
-        </div>
-        <table class="table-bordered table-condensed" id="marterialtable" style="font-family:'Times New Roman', Times, serif;font-size:11px">
-            <thead>
-                <tr>
-                    <th>STT</th>
-                    <th>Diễn giải</th>
-                    <th>Đơn vị tính</th>
-                    <th>Số lượng</th>
-                    <th>Ghi Chú</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+<!--Hàng hóa thông số kỹ thuật-->
+<div class="panel panel-warning" data-widget="{&quot;draggable&quot;: &quot;false&quot;}" data-widget-static="">
+
+    <div class="panel-heading" style="background-color:#337ab7">
+        <h2>Tiêu chí kỹ thuật</h2>
+        <div class="panel-ctrls" data-actions-container="" data-action-collapse="{&quot;target&quot;: &quot;.panel-body&quot;}"><span class="button-icon has-bg"><i class="ti ti-angle-down"></i></span></div>
     </div>
-</div>
-@Html.Partial("~/Views/Shared/_Modal.cshtml")
+    <div class="panel-body no-padding">
+        <div class="table-responsive">
+            <div class="form-group">
+                <button class="btn btn-primary" onclick="getdetail('/Commerce/Requests/GetDetail',0)" data-toggle="tooltip" data-placement="bottom" title="Thêm"><span class="fa fa-plus-square-o"></span></button>
+                <button class="btn btn-warng1" onclick="getdata('/Commerce/Requests/GetDetail')" data-toggle="tooltip" data-placement="bottom" title="Sửa"><span class="fa fa-pencil-square-o"></span></button>
+                <button class="btn btn-danger" onclick="deletedata('/Commerce/Requests/DeleteDetail','table')" data-toggle="tooltip" data-placement="bottom" title="Xóa"><span class="fa fa-trash-o"></span></button>
+            </div>
+            <table class="table-bordered table-condensed" id="marterialtable" style="font-family:'Times New Roman', Times, serif;font-size:11px">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Diễn giải</th>
+                        <th>Đơn vị tính</th>
+                        <th>Số lượng</th>
+                        <th>Ghi Chú</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+    <!--Yêu cầu thương mại-->
+    <div class="panel panel-warning" data-widget="{&quot;draggable&quot;: &quot;false&quot;}" data-widget-static="">
+
+        <div class="panel-heading">
+            <h2>Tiêu chí thương mại</h2>
+            <div class="panel-ctrls" data-actions-container="" data-action-collapse="{&quot;target&quot;: &quot;.panel-body&quot;}"><span class="button-icon has-bg"><i class="ti ti-angle-down"></i></span></div>
+        </div>
+        <div class="panel-body no-padding">
+            <div class="form-group">
+                <button class="btn btn-primary" onclick="loadtm() " data-toggle="tooltip" data-placement="bottom" title="Thêm"><span class="fa fa-plus-square-o"> Thêm</span></button>
+
+               
+            </div>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>- Đồng tiền chào giá: </td>
+                        <td id="TM_1">@(ViewBag.TM == null ? "" : ViewBag.TM.Loai_Tien)</td>
+                    </tr>
+                    <tr>
+                        <td>- Hiệu lực chào giá: </td>
+                        <td id="TM_2">@(ViewBag.TM == null ? "" : ViewBag.TM.Hieu_Luc)</td>
+                    </tr>
+                    <tr>
+                        <td>- Thời gian bảo hành: </td>
+                        <td id="TM_3">@(ViewBag.TM == null ? "" : ViewBag.TM.Thoi_Gian)</td>
+                    </tr>
+                    <tr>
+                        <td>- Địa điểm giao hàng: </td>
+                        <td id="TM_4">@(ViewBag.TM == null ? "" : ViewBag.TM.Dia_Diem)</td>
+                    </tr>
+                    <tr>
+                        <td>- Điều kiện thanh toán: </td>
+                        <td id="TM_5">@(ViewBag.TM == null ? "" : ViewBag.TM.Dieu_Kien)</td>
+                    </tr>
+                    <tr>
+                        <td>- Chính sách bảo hành: </td>
+                        <td id="TM_6">@(ViewBag.TM == null ? "" : ViewBag.TM.BH)</td>
+                    </tr>
+                    <tr>
+                        <td>- Chế độ hậu mãi: </td>
+                        <td id="TM_7">@(ViewBag.TM == null ? "" : ViewBag.TM.Che_Do)</td>
+                    </tr>
+                    <tr>
+                        <td>- Tiêu chí khác: </td>
+                        <td id="TM_8">@(ViewBag.TM == null ? "" : ViewBag.TM.Ghi_Chu)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Modal 1 -->
+    <div id="myModal_1" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Tìm nhà cung cấp</h4>
+                </div>
+                <div class="modal-body" id="modalbody_1">
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("~/Views/Shared/_Modal.cshtml")

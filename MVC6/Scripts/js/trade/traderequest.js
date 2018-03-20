@@ -27,8 +27,7 @@
             style: 'single'
         }
     });
-   $('[data-toggle="tooltip"]').tooltip();
-   
+    $('[data-toggle="tooltip"]').tooltip();
 });
 
 //chọn dữ liệu
@@ -109,9 +108,7 @@ function savedata() {
                 $('#myModal').modal('hide');
                 $.notify("Lỗi Kết Nối", "error");
             }
-
         }
-
     });
 }
 //Xóa dữ liệu
@@ -127,9 +124,9 @@ function deletedata() {
             $.ajax({
                 url: '/Commerce/Requests/Delete',
                 type: 'Post',
-                data: { ma: ma.Id},
+                data: { ma: ma.Id },
                 success: function (data) {
-                    if (data.status===true) {
+                    if (data.status === true) {
                         $('#myModal').modal('hide');
                         $.notify("Xóa thành công", "success");
                         table.ajax.reload();
@@ -157,7 +154,7 @@ function detailweb() {
         return false;
     }
     var url = "/Commerce/Requests/IndexDetail?ma=" + ma.Id;
-    window.location.href =url;
+    window.location.href = url;
 }
 function auto_complete(id) {
     id.autocomplete({
@@ -169,7 +166,6 @@ function auto_complete(id) {
                 success: function (data) {
                     response(data);
                     //response($.map(data, function (item) {
-
                     //    return { lable: item.FullName, value: item.UserName };
 
                     //}));
@@ -182,12 +178,11 @@ function auto_complete(id) {
         },
         select: function (event, ui) {
             id.val(ui.item.UserName);
-         
+
             return false;
         },
         change: function (event, ui) {
             if (ui.item) {
-                
                 return false;
             }
             else {

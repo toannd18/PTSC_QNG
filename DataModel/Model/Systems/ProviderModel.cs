@@ -29,6 +29,11 @@ namespace DataModel.Model.Systems
         [EmailAddress(ErrorMessage ="Yêu Cầu Phải Là Địa Chỉ Email")]
         [StringLength(50, MinimumLength = 1, ErrorMessage = "Yêu Cầu Nhập Không Quá 50 Ký Tự")]
         public string Email { get; set; }
+        [Display(Name ="Loại hình hàng hóa")]
+        public string Hang_Hoa { get; set; }
+        [Display(Name = "Loại hình dịch vụ")]
+        public string Dich_Vu { get; set; }
+        public string Diem { get; set; }
         public bool IsUpdate { get; set; }
     }
 }
