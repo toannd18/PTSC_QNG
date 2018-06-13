@@ -77,7 +77,6 @@
     <Compile Include="Model\Commom\ChangePasswordModel.cs" />
     <Compile Include="Model\Commom\FunctionViewModel.cs" />
     <Compile Include="Model\Systems\DepartmentModel.cs" />
-    <Compile Include="Model\Systems\EquipmentModel.cs" />
     <Compile Include="Model\Systems\FunctionModel.cs" />
     <Compile Include="Model\Systems\PermissionModel.cs" />
     <Compile Include="Model\Systems\ProviderModel.cs" />
@@ -91,7 +90,9 @@
     <Compile Include="Model\Systems\TeamModel.cs" />
     <Compile Include="Model\Commom\UpdateFile.cs" />
     <Compile Include="Model\Trade\DeXuatChiTietModel.cs" />
+    <Compile Include="Model\Trade\DeXuatHDModel.cs" />
     <Compile Include="Model\Trade\DeXuatModel.cs" />
+    <Compile Include="Model\Trade\DeXuatViewModel.cs" />
     <Compile Include="Model\Trade\DGNCCModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

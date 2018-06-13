@@ -15,11 +15,53 @@ namespace DataService.Dao.Systems
         {
             db = new EFDbContext();
         }
+        public List<CheckModel> FindAll()
+        {
+            var tbl = (from c in db.tbl_List_Check
+                       join n in db.tbl_NCC on c.Ma_NCC equals n.Ma_NCC
+                       
+                       
+                       join r in db.tbl_List_Request on c.RequestId equals r.Id
+                       join d in db.tbl_BP on r.Ma_BP equals d.Ma_BP
+                       select new CheckModel
+                       {
+                           Id = c.Id,
+                           RequestId = c.RequestId,
+                           Ma_NCC = c.Ma_NCC,
+                           Ten_NCC = n.Ten_NCC,
+                           Ma_TB = c.Ma_TB,
+                          
+                           YC_KT = c.YC_KT,
+                           TT_KT = c.TT_KT,
+                           YC_SL = c.YC_SL,
+                           TT_SL = c.TT_SL,
+                           DonVi = c.DonVi,
+                           CO = c.CO,
+                           CQ = c.CQ,
+                           MTR = c.MTR,
+                           SN = c.SN,
+                           PN = c.PN,
+                           Other = c.Other,
+                           Note_Other = c.Note_Other,
+                           Reason = c.Reason,
+                           Result = c.Result,
+                           User_Nhap = c.User_Nhap,
+                           Date_Nhap = c.Date_Nhap,
+                           Date_Edit = c.Date_Edit,
+                           User_Edit = c.User_Edit,
+                           DeXuat = r.DeXuat,
+                           HopDong = r.HopDong,
+                           DiaDiem = r.Dia_Diem,
+                           Date = r.Date,
+                           Ten_BP = d.Ten_BP,
+                       }).ToList();
+            return tbl;
+        }
         public List<CheckModel> load(int id)
         {
             var tbl = (from c in db.tbl_List_Check
                        join n in db.tbl_NCC on c.Ma_NCC equals n.Ma_NCC
-                       join t in db.tbl_TB on c.Ma_TB equals t.Ma_TB
+                       
                        where c.RequestId.Equals(id)
                        join r in db.tbl_List_Request on c.RequestId equals r.Id
                        join d in db.tbl_BP on r.Ma_BP equals d.Ma_BP
@@ -30,7 +72,7 @@ namespace DataService.Dao.Systems
                            Ma_NCC = c.Ma_NCC,
                            Ten_NCC = n.Ten_NCC,
                            Ma_TB = c.Ma_TB,
-                           Ten_TB = t.Ten_TB,
+                          
                            YC_KT = c.YC_KT,
                            TT_KT = c.TT_KT,
                            YC_SL = c.YC_SL,
@@ -135,6 +177,7 @@ namespace DataService.Dao.Systems
         {
             var tbl = db.tbl_List_Request.Find(ma);
             tbl.Status_Autho = result;
+            tbl.Date_Autho = DateTime.Now;
             db.SaveChanges();
         }
     }

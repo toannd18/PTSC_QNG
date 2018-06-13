@@ -28,7 +28,7 @@ namespace Data.Data
         public virtual DbSet<tbl_List_Request> tbl_List_Request { get; set; }
         public virtual DbSet<tbl_NCC> tbl_NCC { get; set; }
         public virtual DbSet<tbl_Notifications> tbl_Notifications { get; set; }
-        public virtual DbSet<tbl_TB> tbl_TB { get; set; }
+     
         public virtual DbSet<tbl_TO> tbl_TO { get; set; }
         public virtual DbSet<tbl_DeXuat> tbl_DeXuat { get; set; }
         public virtual DbSet<tbl_DeXuat_KT> tbl_DeXuat_KT { get; set; }
@@ -37,6 +37,7 @@ namespace Data.Data
         public virtual DbSet<tbl_DeXuat_TM> tbl_DeXuat_TM { get; set; }
         public virtual DbSet<tbl_DG_KT> tbl_DG_KT { get; set; }
         public virtual DbSet<tbl_DG_TM> tbl_DG_TM { get; set; }
+        public virtual DbSet<tbl_DeXuat_HD> tbl_DeXuat_HD { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -182,7 +183,7 @@ namespace Data.Data
 
             modelBuilder.Entity<tbl_List_Check>()
                 .Property(e => e.Ma_TB)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             modelBuilder.Entity<tbl_List_Check>()
                 .Property(e => e.User_Nhap)
@@ -244,18 +245,6 @@ namespace Data.Data
                 .Property(e => e.Url)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<tbl_TB>()
-                .Property(e => e.Ma_TB)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<tbl_TB>()
-                .Property(e => e.Ma_NCC)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<tbl_TB>()
-                .Property(e => e.Ten_TB)
-                .IsFixedLength();
-
             modelBuilder.Entity<tbl_TO>()
                 .Property(e => e.Ma_TO)
                 .IsUnicode(false);
@@ -297,7 +286,16 @@ namespace Data.Data
             modelBuilder.Entity<tbl_DeXuat_TM>()
                 .Property(e => e.Loai_Tien)
                 .IsUnicode(false);
-            
+
+            modelBuilder.Entity<tbl_DeXuat_HD>()
+                .Property(e => e.Ma_NCC)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<tbl_DeXuat_HD>()
+                .Property(e => e.Diem)
+                .IsUnicode(false);
+
+
         }
 
        

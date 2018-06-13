@@ -39,9 +39,17 @@
             {
                 data: 'Ten_NCC'
             },
-            { data: 'DG_KT' },
+            {
+                data: 'DG_KT', render: function (data) {
+                    return data === true ? "Đạt" : "Không đạt";
+                }
+            },
             { data: 'DG_TM' },
-            { data: 'DG' }
+            {
+                data: 'DG', render: function (data,type,row) {
+                    return "<input type='Number' data-id='" + row.Id + "' value='" + data + "' class='DG'>";
+                }
+            }
 
         ],
         select: {
@@ -52,9 +60,17 @@
         table1.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
             cell.innerHTML = i + 1;
         });
+        $(".DG").change(function () {
+            var ma = parseInt($(this).data("id"));
+            var data =parseInt($(this).val());
+            savedg(ma, data);
+        });
     }).draw();
     $('[data-toggle="tooltip"]').tooltip();
+   
 });
+
+//Tiêu chí kỹ thuật
 function getdata(url) {
     var ma = table.row('.selected').data();
     if (ma === undefined) {
@@ -69,6 +85,10 @@ function getdetail(url, ma) {
         data: { ma: ma },
         type: 'Get',
         success: function (data) {
+            if (data === "Error") {
+                bootbox.alert("Bạn không có quyền làm điều này");
+                return false;
+            }
             $('#myModal').modal('show');
             $('#modalbody').html(data);
             $('#DeXuatId').val($('#ma').val());
@@ -134,7 +154,7 @@ function deletedata(url, nametable) {
                             table.ajax.reload();
                         }
                     }
-                    else if (!data) {
+                    else if (data==="Error") {
                         bootbox.alert("Ban Không có quyền để làm điều này");
                     }
                     else {
@@ -156,6 +176,10 @@ function loadncc() {
         url: '/Commerce/Requests/SelectNCC',
         type: 'Get',
         success: function (data) {
+            if (data === "Error") {
+                bootbox.alert("Ban Không có quyền để làm điều này");
+                return false;
+            }
             $('#myModal_1').modal('show');
             $('#modalbody_1').html(data);
             $('#sel1').val('0');
@@ -244,7 +268,7 @@ function deletencc() {
                         $.notify("Xóa thành công", "success");
                         table1.ajax.reload();
                     }
-                    else if (!data) {
+                    else if (data==="Error") {
                         bootbox.alert("Ban Không có quyền để làm điều này");
                     }
                     else {
@@ -267,6 +291,10 @@ function loadtm() {
         data: { dx: $("#ma").val() },
         type: 'Get',
         success: function (data) {
+            if (data === "Error") {
+                bootbox.alert("Bạn không có quyền làm việc này");
+                return false;
+            }
             $('#myModal').modal('show');
             $('#modalbody').html(data);
             $('#DeXuatId').val($('#ma').val());
@@ -275,7 +303,7 @@ function loadtm() {
             form.removeData('unobtrusiveValidation');
             $.validator.unobtrusive.parse(form);
         }
-    })
+    });
 }
 function savetm() {
     var form = $('#tmform').closest('form');
@@ -309,5 +337,39 @@ function savetm() {
         error: function (err) {
             bootbox.alert("Lỗi máy chủ");
         }
-    })
+    });
+}
+
+function loadanimate(data) {
+    var scrollpos;
+    if (data === 'home') {
+        scrollpos = 0;
+    }
+    else {
+        scrollpos = $(data).offset().top;
+    }
+    
+    $("html, body").animate({ scrollTop: scrollpos }, "500");
+}
+
+function savedg(ma, data) {
+    $.ajax({
+        url: "/Commerce/Requests/DGChung",
+        data: { ma: ma, data: data },
+        type: "Post",
+        success: function (data) {
+            if (data === true) {
+                $.notify("Lưu thành công", "success");
+            }
+            else if (data === "Error") {
+                bootbox.alert("Ban Không có quyền để làm điều này");
+            }
+            else {
+                $.notify("Lỗi kết nối", "error");
+            }
+        },
+        error: function (err) {
+            $.notify("Lỗi máy chủ", "error");
+        }
+    });
 }

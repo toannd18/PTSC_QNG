@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace DataModel.Model.Trade
 {
@@ -9,11 +10,12 @@ namespace DataModel.Model.Trade
 
         [Required(ErrorMessage = "Yêu cầu chọn nhà cung cấp", AllowEmptyStrings = false)]
         [Display(Name = "Nhà cung cấp")]
+
         public string Ma_NCC { get; set; }
 
-        [Display(Name = "Đánh giá kỹ thuật")]
+        [Display(Name = "Nhà cung cấp")]
         public string Ten_NCC { get; set; }
-
+        [Display(Name = "Đánh giá kỹ thuật")]
         public bool? DG_KT { get; set; }
 
         [Display(Name = "Đánh giá thương mại")]
@@ -21,5 +23,6 @@ namespace DataModel.Model.Trade
 
         [Display(Name = "Đề xuất lựa chọn")]
         public int? DG { get; set; }
+
     }
 }

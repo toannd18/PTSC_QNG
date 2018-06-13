@@ -66,6 +66,7 @@
     <Compile Include="Data\tbl_Daily.cs" />
     <Compile Include="Data\tbl_DailyDetail.cs" />
     <Compile Include="Data\tbl_DeXuat.cs" />
+    <Compile Include="Data\tbl_DeXuat_HD.cs" />
     <Compile Include="Data\tbl_DeXuat_KT.cs" />
     <Compile Include="Data\tbl_DeXuat_TM.cs" />
     <Compile Include="Data\tbl_DG_KT.cs" />
@@ -76,8 +77,8 @@
     <Compile Include="Data\tbl_List_Request.cs" />
     <Compile Include="Data\tbl_NCC.cs" />
     <Compile Include="Data\tbl_Notifications.cs" />
-    <Compile Include="Data\tbl_TB.cs" />
     <Compile Include="Data\tbl_TO.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +90,5 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

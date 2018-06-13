@@ -29,7 +29,7 @@ namespace MVC6.Controllers
         }
         public ActionResult LoadData()
         {
-            var data = new UserDao().load();
+            var data = new UserDao().loadview();
             return Json(new { data = data }, JsonRequestBehavior.AllowGet);
         }
 

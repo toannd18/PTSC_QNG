@@ -1,17 +1,20 @@
 ﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layoutadmin.cshtml";
+
 }
 @section style{
     <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
 
     <link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/row-detail.css" rel="stylesheet" />
 }
 @section jfooter{
 
     <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
     <script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
     <script src="~/Scripts/DataTables/dataTables.select.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.responsive.min.js"></script>
     <script src="~/Scripts/js/trade/traderequest.js"></script>
 }
 <h3 class="blank1">Phiếu Đề Xuất</h3>
@@ -26,10 +29,12 @@
         <table class="table-bordered table-condensed" id="commercetable" style="font-family:'Times New Roman', Times, serif;font-size:11px">
             <thead>
                 <tr>
+                    <th></th>
                     <th>Mã Đề Xuất</th>
                     <th>Tên Đề Xuất</th>
                     <th>Loại Đề Xuất</th>
                     <th>Người Đề Xuất</th>
+                    <th>Người Thực Hiện</th>
                     <th>Ngày tạo</th>
                 </tr>
             </thead>

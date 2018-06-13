@@ -14,7 +14,7 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Ma_BP, new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(m => m.Ma_BP, ViewBag.Depart as SelectList, "--- Chọn ---", new { @class = "form-control", @readonly = "readonly" })
+            @Html.DropDownListFor(m => m.Ma_BP, ViewBag.Depart as SelectList, new { @class = "form-control",})
             @Html.ValidationMessageFor(m => m.Ma_BP, "", new { @class = "text-danger" })
         </div>
     </div>

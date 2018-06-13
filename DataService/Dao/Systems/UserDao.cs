@@ -20,6 +20,24 @@ namespace DataService.Dao.Systems
             var model = db.AppUsers.ToList();
             return model;
         }
+        public List<AppUserModel> loadview()
+        {
+            var model = (from a in db.AppUsers
+                         join t in db.tbl_TO on a.Ma_TO equals t.Ma_TO into g1
+                         from t in g1.DefaultIfEmpty()
+                         join b in db.tbl_BP on a.Ma_BP equals b.Ma_BP
+                         select new AppUserModel
+                         {
+                             Id = a.Id,
+                             UserName = a.UserName,
+                             FullName = a.FullName,
+                             Email = a.Email,
+                             Avatar = a.Avatar,
+                             Ten_To = t.Ten_TO,
+                             Ten_BP = b.Ten_BP
+                         }).ToList();
+            return model;
+        }
         public AppUserModel detail(int ma)
         {
             var tbl = db.AppUsers.Where(m => m.Id.Equals(ma)).Select(m => new AppUserModel
@@ -176,5 +194,9 @@ namespace DataService.Dao.Systems
         public string UserName { get; set; }
         public string FullName { get; set; }
         public string Email { get; set; }
+    }
+    public class UserViewModel
+    {
+
     }
 }

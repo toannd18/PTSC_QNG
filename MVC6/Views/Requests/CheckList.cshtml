@@ -4,9 +4,7 @@
     Layout = "~/Views/Shared/_Layoutadmin.cshtml";
 }
 @section style{
-    <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
 
-    <link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
 <style>
     .ui-autocomplete-loading {
         background: white url("../../images/ui-anim_basic_16x16.gif") right center no-repeat;
@@ -14,9 +12,7 @@
 </style>
 }
 @section jfooter{
-
-    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
-    <script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
+    
     <script src="~/Scripts/js/application/check.js"></script>
 
 }
@@ -143,8 +139,11 @@
     </div>
     
     <div class="form-group">
-        <button class="btn btn-primary" onclick="detail(0)">Thêm Mới</button>
-        <button class="btn btn-danger" data-toggle="modal" data-target="#modalemail">Gửi Yêu Cầu</button>
+        <button class="btn btn-primary" data-toggle="tooltip" title='Thêm mới' onclick='detail(0)'><span class='fa fa-plus-square'></span></button>
+
+        <button class='btn-sm btn-success' data-toggle='tooltip' title='Sửa' onclick='getdata()'><span class='fa fa-pencil-square-o'></span></button>
+        <button class='btn btn-danger' data-toggle='tooltip' title='Xóa' onclick='deletedata()'><span class='fa fa-trash-o'></span></button>
+        <button class="btn btn-danger" data-toggle="tooltip" title='Gửi yêu cầu' onclick='ShowModal("#modalemail")'><span class='fa fa-envelope'></span></button>
     </div>
     <div class="table-responsive">
         <table class="display nowrap cell-border table-striped table-bordered" id="checktbl" style="vertical-align:central;font-family:'Times New Roman', Times, serif;font-size:11px">
@@ -159,10 +158,9 @@
                     <th colspan="3" >Số Lượng</th>
                     <th colspan="6">Hồ Sơ Kèm Theo</th>
                     <th rowspan="2" style="vertical-align:middle">Kết Luận</th>
-                    <th rowspan="2" style="vertical-align:middle">#</th>
+                    
                 </tr>
                 <tr>
-                  
                     <th>Yêu Cầu</th>
                     <th>Thực Tế</th>
                     <th>Yêu Cầu</th>
@@ -174,7 +172,6 @@
                     <th>S/N</th>
                     <th>P/N</th>
                     <th>Khác</th>
-                
                 </tr>
             </thead>
             <tbody></tbody>

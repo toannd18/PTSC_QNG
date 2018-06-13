@@ -12,11 +12,12 @@ namespace DataModel.Model.Trade
         public int Id { get; set; }
         [Required(ErrorMessage ="Yêu cầu nhập dữ liệu")]
         [StringLength(50,MinimumLength =5,ErrorMessage ="Ít nhất là 4 ký tự và nhiều nhất là 50 ký tự")]
-        [Remote("CheckExistDX", "Requests", ErrorMessage = "Đề xuất này đã tồn tại")]
+        [Remote("CheckExistDX", "Requests",AdditionalFields = "Tieu_De", ErrorMessage = "Đề xuất này đã tồn tại")]
         [Display(Name ="Mã")]
         public string Ma { get; set; }
         [Required(ErrorMessage = "Yêu cầu nhập dữ liệu")]
         [StringLength(100, MinimumLength = 5, ErrorMessage = "Ít nhất là 4 ký tự và nhiều nhất là 100 ký tự")]
+        [Remote("CheckExistDX", "Requests", AdditionalFields = "Ma", ErrorMessage = "Đề xuất này đã tồn tại")]
         [Display(Name = "Tên Đề Xuất")]
         public string Tieu_De { get; set; }
         [Required(ErrorMessage = "Yêu cầu nhập dữ liệu")]
@@ -36,39 +37,42 @@ namespace DataModel.Model.Trade
         public string Ten_Dx5 { get; set; }
         [Display(Name ="Tổ trưởng")]
         public string Ten_Dg { get; set; }
-        [Display(Name = "Tổ phó")]
+        [Display(Name = "Tổ phó thương mại")]
         public string Ten_Dg1 { get; set; }
-        [Display(Name = "Tổ viên 1")]
+        [Display(Name = "Tổ phó kỹ thuật")]
         public string Ten_Dg2 { get; set; }
-        [Display(Name = "Tổ viên 2")]
+        [Display(Name = "Tổ viên thương mại")]
         public string Ten_Dg3 { get; set; }
+        [Display(Name = "Tổ viên kỹ thuật")]
+        public string Ten_Dg4 { get; set; }
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString ="{0:dd/MM/yyyy",ApplyFormatInEditMode =true)]
+        [DisplayFormat(DataFormatString ="{0:dd/MM/yyyy}",ApplyFormatInEditMode =true)]
         [Display(Name ="Ngày đề xuất")]
         public DateTime? Ngay_Tao { get; set; }
+
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy", ApplyFormatInEditMode = true)]
-        [Display(Name = "Ngày chào giá")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Gửi hồ sơ chào giá")]
         public DateTime? Ngay_Gui { get; set; }
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy", ApplyFormatInEditMode = true)]
-        [Display(Name = "Ngày phê duyệt")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Phê duyệt đánh giá")]
         public DateTime? Ngay_PD { get; set; }
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Ngày ký hợp đồng")]
         public DateTime? Ngay_HD { get; set; }
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Ngày thực hiện hợp đồng")]
         public DateTime? Ngay_PHD { get; set; }
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy", ApplyFormatInEditMode = true)]
-        [Display(Name = "Ngày hết hạn")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Thời gian nộp chào giá")]
         public DateTime? Ngay_Exp { get; set; }
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy", ApplyFormatInEditMode = true)]
-        [Display(Name = "Ngày đánh giá")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Thời gian đánh giá")]
         public DateTime? Ngay_Eval { get; set; }
     }
 }

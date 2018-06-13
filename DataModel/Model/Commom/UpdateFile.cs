@@ -11,6 +11,7 @@ namespace DataModel.Model.Commom
         public string name { get; set; }
         public string email { get; set; }
         public int Id { get; set; }
+        public string Ghi_Chu { get; set; }
         public HttpPostedFileBase file { get; set; }
     }
 }

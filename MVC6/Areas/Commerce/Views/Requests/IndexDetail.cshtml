@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/_Layoutadmin.cshtml";
+    var user = ViewBag.User as List<Data.Data.AppUser>;
 }
 @section style{
     <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
@@ -16,7 +17,7 @@
     <script src="~/Scripts/DataTables/dataTables.select.min.js"></script>
     <script src="~/Scripts/js/trade/tradedetail.js"></script>
 }
-<div class="bs-example4" data-example-id="simple-responsive-table">
+<div class="bs-example4"  data-example-id="simple-responsive-table">
     <input id="ma" type="hidden" value="@Model.Id" />
     <div class="table-responsive">
         <table style="width:70%;margin:auto" class="center">
@@ -55,16 +56,19 @@
                     <td style="font-weight:bold">Danh sách thành viên tổ đánh giá:</td>
                 </tr>
                 <tr>
-                    <td style="padding-left:10px"> Tổ trưởng: @Model.Ten_Dg</td>
+                    <td style="padding-left:10px"> Tổ trưởng: @user.Where(m => m.UserName == Model.Ten_Dg).Select(m => m.FullName).FirstOrDefault()</td>
                 </tr>
                 <tr>
-                    <td style="padding-left:10px"> Tổ phó: @Model.Ten_Dg1</td>
+                    <td style="padding-left:10px"> Tổ phó thương mại: @user.Where(m => m.UserName == Model.Ten_Dg1).Select(m => m.FullName).FirstOrDefault()</td>
                 </tr>
                 <tr>
-                    <td style="padding-left:10px"> Tổ viên: @Model.Ten_Dg2</td>
+                    <td style="padding-left:10px"> Tổ phó kỹ thuật: @user.Where(m => m.UserName == Model.Ten_Dg2).Select(m => m.FullName).FirstOrDefault()</td>
                 </tr>
                 <tr>
-                    <td style="padding-left:10px"> Tổ viên: @Model.Ten_Dg3</td>
+                    <td style="padding-left:10px"> Tổ viên thương mại: @user.Where(m => m.UserName == Model.Ten_Dg3).Select(m => m.FullName).FirstOrDefault()</td>
+                </tr>
+                <tr>
+                    <td style="padding-left:10px"> Tổ viên kỹ thuật: @user.Where(m => m.UserName == Model.Ten_Dg4).Select(m => m.FullName).FirstOrDefault()</td>
                 </tr>
             </tbody>
         </table>
@@ -77,6 +81,27 @@
         <div class="form-group">
             <button class="btn btn-primary" onclick="loadncc()" data-toggle="tooltip" data-placement="bottom" title="Thêm"><span class="fa fa-plus-square-o"></span></button>
             <button class="btn btn-danger" onclick="deletencc()" data-toggle="tooltip" data-placement="bottom" title="Xóa"><span class="fa fa-trash-o"></span></button>
+            <div class="btn-group">
+                <button class="btn btn-success btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Đánh giá <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" style="min-width:20px">
+                    <li><a href="/Commerce/Evaluations/IndexSpec?dx=@Model.Id">Kỹ thuật</a></li>
+                    <li><a href="/Commerce/Evaluations/IndexCom?dx=@Model.Id">Thương mại</a></li>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-info btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    In <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" style="min-width:20px">
+                    <li><a href="/Report/Reports/EvaluePlan?dx=@Model.Id">Kế hoạch</a></li>
+                    <li><a href="/Report/Reports/EvaluePrice?dx=@Model.Id">Chào giá</a></li>
+                    <li><a href="/Report/Reports/EvalueTrade?dx=@Model.Id">Đánh giá HĐ</a></li>
+                    <li><a href="/Report/Reports/EvalueTrade1?dx=@Model.Id">Đánh giá ĐĐH</a></li>
+                </ul>
+            </div>
+
         </div>
         <table class="table-bordered table-condensed" id="ncctable" style="font-family:'Times New Roman', Times, serif;font-size:11px">
             <thead>
@@ -93,7 +118,7 @@
     </div>
 </div>
 <!--Hàng hóa thông số kỹ thuật-->
-<div class="panel panel-warning" data-widget="{&quot;draggable&quot;: &quot;false&quot;}" data-widget-static="">
+<div class="panel panel-warning" id="kt" data-widget="{&quot;draggable&quot;: &quot;false&quot;}" data-widget-static="">
 
     <div class="panel-heading" style="background-color:#337ab7">
         <h2>Tiêu chí kỹ thuật</h2>
@@ -122,7 +147,7 @@
     </div>
     </div>
     <!--Yêu cầu thương mại-->
-    <div class="panel panel-warning" data-widget="{&quot;draggable&quot;: &quot;false&quot;}" data-widget-static="">
+<div class="panel panel-warning" id="tm"data-widget="{&quot;draggable&quot;: &quot;false&quot;}" data-widget-static="">
 
         <div class="panel-heading">
             <h2>Tiêu chí thương mại</h2>
@@ -172,6 +197,14 @@
             </table>
         </div>
     </div>
+<!-- Toolbox-->
+<div id="toolbox" style="position:fixed;right:10px;bottom:45%;display:block">
+    <div class="list-group">
+        <button type="button" class="list-group-item" data-toggle="tooltip" data-placement="top" title="Đầu trang" onclick="loadanimate('home')"><span class="glyphicon glyphicon-arrow-up"></span></button>
+        <button type="button" class="list-group-item" data-toggle="tooltip" data-placement="left" title="Kỹ thuật" onclick="loadanimate('#kt')"><span class="glyphicon glyphicon-wrench"></span></button>
+        <button type="button" class="list-group-item" data-toggle="tooltip" data-placement="bottom" title="Thương mại" onclick="loadanimate('#tm')"><span class="glyphicon glyphicon-signal"></span></button>
+    </div>
+</div>
     <!-- Modal 1 -->
     <div id="myModal_1" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg">

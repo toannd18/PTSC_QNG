@@ -12,7 +12,9 @@
         columns: [
                        { data: 'UserName' },
             { data: 'FullName' },
-            { data: 'Email' },  
+            { data: 'Email' },
+            { data: 'Ten_To' },
+            { data: 'Ten_BP' },
             {
                 data: 'Avatar', render: function (data) {
                     return "<img src='" + data + "' height='50' width='50'/>";

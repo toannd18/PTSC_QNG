@@ -52,6 +52,7 @@ namespace DataModel.Model.Applications
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public Nullable<System.DateTime> Date { get; set; }
         public string FullName { get; set; }
+        public string FullName_1 { get; set; }
         [NotMapped]
         public HttpPostedFileBase uploafile { get; set; }
     }

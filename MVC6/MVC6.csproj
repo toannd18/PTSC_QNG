@@ -19,8 +19,9 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress />
-    <IISExpressSSLPort />
+    <Use64BitIISExpress>
+    </Use64BitIISExpress>
+    <IISExpressSSLPort>44375</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -79,8 +80,8 @@
     <Reference Include="DevExpress.XtraCharts.v17.2, Version=17.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraGauges.v17.2.Core, Version=17.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraReports.v17.2, Version=17.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="EASendMail45, Version=7.3.1.8, Culture=neutral, PublicKeyToken=88adb80ecd66540b, processorArchitecture=MSIL">
-      <HintPath>..\packages\EASendMail.7.3.1.8\lib\net45\EASendMail45.dll</HintPath>
+    <Reference Include="EASendMail45, Version=7.3.1.9, Culture=neutral, PublicKeyToken=88adb80ecd66540b, processorArchitecture=MSIL">
+      <HintPath>..\packages\EASendMail.7.3.1.9\lib\net45\EASendMail45.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
@@ -218,6 +219,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Commerce\CommerceAreaRegistration.cs" />
+    <Compile Include="Areas\Commerce\Controllers\ContractionsController.cs" />
+    <Compile Include="Areas\Commerce\Controllers\EvaluationsController.cs" />
     <Compile Include="Areas\Commerce\Controllers\RequestsController.cs" />
     <Compile Include="Areas\Daily\Controllers\DailysController.cs" />
     <Compile Include="Areas\Daily\Controllers\ReportsController.cs" />
@@ -227,7 +230,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApprovalsController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
-    <Compile Include="Controllers\EquipmentsController.cs" />
     <Compile Include="Controllers\FunctionsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PositionsController.cs" />
@@ -253,6 +255,11 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\row-detail.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\webfonts\fa-brands-400.svg" />
+    <Content Include="Content\webfonts\fa-regular-400.svg" />
+    <Content Include="Content\webfonts\fa-solid-900.svg" />
     <Content Include="Files\Templates\Approval.html" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="images\Icon.jpg" />
@@ -415,7 +422,7 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
-    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome-old.css" />
     <Content Include="Content\graph.css" />
     <Content Include="Content\icon-font.min.css" />
     <Content Include="Content\ShieldUI.css" />
@@ -525,8 +532,35 @@
     <Content Include="Areas\Commerce\Views\Requests\_DetailMarterial.cshtml" />
     <Content Include="Areas\Commerce\Views\Requests\_ListNCC.cshtml" />
     <Content Include="Areas\Commerce\Views\Requests\_DetailCommerce.cshtml" />
+    <Content Include="Areas\Commerce\Views\Evaluations\IndexSpec.cshtml" />
+    <Content Include="Areas\Commerce\Views\Evaluations\_DetailDGKT.cshtml" />
+    <Content Include="Areas\Commerce\Views\Evaluations\_DetailNCC_KT.cshtml" />
+    <Content Include="Areas\Commerce\Views\Evaluations\IndexCom.cshtml" />
+    <Content Include="Areas\Commerce\Views\Evaluations\_DetailDG.cshtml" />
+    <Content Include="Areas\Commerce\Views\Evaluations\_DetailDGTM.cshtml" />
+    <Content Include="Files\Templates\Sample Ho So.xlsx" />
+    <Content Include="Files\Templates\QN-QUA-PR06-FM03 So theo doi.xlsx" />
+    <Content Include="Files\Templates\Sample Chao gia.xlsx" />
+    <Content Include="Files\Templates\Bao cao nhat ky cong viec.xlsx" />
+    <Content Include="Files\Templates\Sample Lap Ke Hoach.xlsx" />
+    <Content Include="Areas\Commerce\Views\Contractions\Index.cshtml" />
+    <Content Include="Areas\Commerce\Views\Contractions\_DetailHD.cshtml" />
+    <Content Include="Files\Templates\Sample Ho So 1.xlsx" />
+    <Content Include="Content\webfonts\fa-brands-400.eot" />
+    <Content Include="Content\webfonts\fa-brands-400.ttf" />
+    <Content Include="Content\webfonts\fa-brands-400.woff" />
+    <Content Include="Content\webfonts\fa-brands-400.woff2" />
+    <Content Include="Content\webfonts\fa-regular-400.eot" />
+    <Content Include="Content\webfonts\fa-regular-400.ttf" />
+    <Content Include="Content\webfonts\fa-regular-400.woff" />
+    <Content Include="Content\webfonts\fa-regular-400.woff2" />
+    <Content Include="Content\webfonts\fa-solid-900.eot" />
+    <Content Include="Content\webfonts\fa-solid-900.ttf" />
+    <Content Include="Content\webfonts\fa-solid-900.woff" />
+    <Content Include="Content\webfonts\fa-solid-900.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
-    <Content Include="Reports\PhieuKiemTra.xlsx" />
+    <Content Include="Files\Templates\PhieuKiemTra.xlsx" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <Content Include="images\1.jpg" />
     <Content Include="images\1.png" />
@@ -650,6 +684,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jszip.min.js" />
     <Content Include="Scripts\js\dailys\report.js" />
     <Content Include="Scripts\js\dailys\dailydetail.js" />
     <Content Include="Scripts\js\dailys\daily.js" />
@@ -665,6 +700,9 @@
     <Content Include="Scripts\asset\role.js" />
     <Content Include="Scripts\js\Systems\position.js" />
     <Content Include="Scripts\js\Systems\team.js" />
+    <Content Include="Scripts\js\trade\contract.js" />
+    <Content Include="Scripts\js\trade\evalue.js" />
+    <Content Include="Scripts\js\trade\evaluetm.js" />
     <Content Include="Scripts\js\trade\tradedetail.js" />
     <Content Include="Scripts\js\trade\traderequest.js" />
     <Content Include="Scripts\js\user.js" />
@@ -712,8 +750,6 @@
     <Content Include="Views\Providers\_DetailProvider.cshtml" />
     <Content Include="Views\Departments\Index.cshtml" />
     <Content Include="Views\Departments\_DetailDepartment.cshtml" />
-    <Content Include="Views\Equipments\Index.cshtml" />
-    <Content Include="Views\Equipments\_DetailEquipment.cshtml" />
     <Content Include="Views\Requests\Require.cshtml" />
     <Content Include="Views\Requests\_DetailRequire.cshtml" />
     <Content Include="Views\Requests\CheckList.cshtml" />

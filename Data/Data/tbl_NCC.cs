@@ -26,9 +26,9 @@ namespace Data.Data
 
         [StringLength(50)]
         public string Email { get; set; }
-
         public string Hang_Hoa { get; set; }
         public string Dich_Vu { get; set; }
         public string Diem { get; set; }
+        public int? Time { get; set; }
     }
 }

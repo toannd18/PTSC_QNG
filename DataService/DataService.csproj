@@ -62,7 +62,6 @@
     <Compile Include="Dao\DailyReports\DailyDetailDao.cs" />
     <Compile Include="Dao\DailyReports\DailyReportDao.cs" />
     <Compile Include="Dao\Systems\DepartmentDao.cs" />
-    <Compile Include="Dao\Systems\EquipmentDao.cs" />
     <Compile Include="Dao\ExportReports\ExportReportDao.cs" />
     <Compile Include="Dao\Systems\FunctionDao.cs" />
     <Compile Include="Dao\Systems\PermissionDao.cs" />
@@ -75,8 +74,11 @@
     <Compile Include="Dao\Systems\UserDao.cs" />
     <Compile Include="Dao\Trade\DeXuatChiTietDao.cs" />
     <Compile Include="Dao\Trade\DeXuatDao.cs" />
+    <Compile Include="Dao\Trade\DeXuatHDDao.cs" />
     <Compile Include="Dao\Trade\DeXuatNCCDao.cs" />
     <Compile Include="Dao\Trade\DeXuatTMDao.cs" />
+    <Compile Include="Dao\Trade\DGKTDao.cs" />
+    <Compile Include="Dao\Trade\DGTMDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

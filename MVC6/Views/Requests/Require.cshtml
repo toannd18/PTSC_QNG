@@ -12,22 +12,29 @@
 
     <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
     <script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
+
+
     <script src="~/Scripts/js/application/request.js"></script>
+
 }
 <h3 class="blank1">Phiếu Yêu Cầu</h3>
 <div class="form-group">
     <button class="btn btn-primary" onclick="detail(0)">Thêm Mới</button>
+    <a href="~/Report/Reports/ExportSoTheoDoi" class="btn btn-info">Export</a>
 </div>
 <div class="bs-example4" data-example-id="simple-responsive-table">
     <div class="table-responsive">
         <table class="cell-border table-striped table-bordered" id="requiretbl" style="font-family:'Times New Roman', Times, serif;font-size:11px">
             <thead>
                 <tr>
-                    <th>Mã Phiếu Yêu Cầu</th>
-                    <th>Bộ Phận Kiểm Tra</th>
-                    <th>Địa Điểm Kiểm Tra</th>
-                    <th>Thời Gian Kiểm Tra</th>
-                    <th>Người Tạo</th>
+                    <th>Phiếu yêu cầu</th>
+                    <th>Bộ phận yêu cầu</th>
+                    <th>Địa điểm kiểm tra</th>
+                    <th>Thời gian yêu cầu</th>
+                    <th>Người yêu cầu</th>
+                    <th>Thời gian kiểm tra</th>
+                    <th>Người kiểm tra</th>
+
                     <th>Tình Trạng</th>
                     <th>#</th>
                 </tr>

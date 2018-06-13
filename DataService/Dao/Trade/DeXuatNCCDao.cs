@@ -31,6 +31,7 @@ namespace DataService.Dao.Trade
                              DG_TM = d.DG_TM,
                              DG = d.DG,
                              Ten_NCC = n.Ten_NCC
+                           
                          })).OrderBy(m => m.Ma_NCC).ToList();
             return model;
         }
@@ -69,7 +70,9 @@ namespace DataService.Dao.Trade
             try
             {
                 tbl = db.tbl_DG_NCC.Find(m.Id);
-                tbl.Ma_NCC = m.Ma_NCC;
+                tbl.DG = m.DG;
+                tbl.DG_KT = m.DG_KT;
+                tbl.DG_TM = m.DG_TM;
                 db.SaveChanges();
                 return true;
             }
@@ -94,6 +97,25 @@ namespace DataService.Dao.Trade
             {
                 return false;
             }
+        }
+
+        public bool UpdateDG(int ma, int data)
+        {
+            try
+            {
+                tbl = db.tbl_DG_NCC.Find(ma);
+                tbl.DG = data;
+                db.SaveChanges();
+                return true;
+            }catch
+            {
+                return false;
+            }
+           
+        }
+        public bool CheckExistNCC(int dx, string ma)
+        {
+            return !db.tbl_DG_NCC.Any(m => m.DeXuatId == dx && m.Ma_NCC == ma);
         }
     }
 }

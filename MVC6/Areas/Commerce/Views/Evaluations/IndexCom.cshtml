@@ -1,0 +1,199 @@
+﻿@model List<DataService.Dao.Trade.DGTMModel>
+@using System.Globalization
+@{
+    ViewBag.Title = "IndexCom";
+    Layout = "~/Views/Shared/_Layoutadmin.cshtml";
+ 
+        var getDGTM = ViewBag.DGTM as List<DataService.Dao.Trade.DG_TMView>;
+
+   
+}
+
+@section style{
+
+}
+@section jfooter{
+
+    <script src="~/Scripts/js/trade/evaluetm.js"></script>
+}
+<h3 class="blank1">Phiếu Đề Xuất</h3>
+<div class="bs-example4" data-example-id="simple-responsive-table">
+    <div class="table-responsive">
+        <div class="form-group">
+            <button class="btn btn-primary" onclick="getdata()" data-toggle="tooltip" data-placement="bottom" title="Đánh giá">Đánh giá</button>
+            <button class="btn btn-success btn-sm" onclick="gettm()" data-toggle="tooltip" data-placement="bottom" title="Thương mại">Thương mại</button>
+        </div>
+        <input type="hidden" value="@ViewBag.DeXuat" id="dxid" />
+        <table class="table table-bordered table-condensed" id="spectable" style="font-family:'Times New Roman', Times, serif;font-size:14px;width:100%;">
+            <thead>
+                <tr>
+                    <th rowspan="2" style="width:2%;vertical-align:middle">STT</th>
+                    <th rowspan="2" style="vertical-align:middle">Các tiêu chí đánh giá</th>
+                    <th rowspan="2" style="width:5%;vertical-align:middle">ĐVT</th>
+                    <th rowspan="2" style="width:6%;vertical-align:middle">Số lượng</th>
+                    @foreach (var item in ViewBag.NCC)
+                    {
+                        <th colspan="2">Nhà cung cấp @item.Ma_NCC</th>
+
+                    }
+                </tr>
+                <tr>
+                    @foreach (var item in ViewBag.NCC)
+                    {
+                        <th>Đơn giá</th>
+                        <th>Thành tiền</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="font-weight:bold">
+                    <td>1</td>
+                    <td colspan="9">Giá chào</td>
+                </tr>
+                @for (int i = 0; i < Model.Count(); i++)
+                {
+                    <tr data-id="@Model[i].Ma">
+                        <td>1.@(i + 1)</td>
+                        <td>
+                            <b>@Model[i].Ten:</b>
+                            <br />
+                            @Model[i].Mo_Ta
+                        </td>
+                        <td>@Model[i].DVT</td>
+                        <td>@Model[i].So_luong</td>
+                        @foreach (var item in ViewBag.NCC)
+                        {
+
+                            foreach (var item1 in Model[i].subjectTM)
+                            {
+
+                                if (item.Ma_NCC == item1.NCC)
+                                {
+                        <td>@(String.Format(CultureInfo.InvariantCulture, "{0:#,###}", item1.Don_Gia))</td>
+                                    <td class="sum">@(String.Format(CultureInfo.InvariantCulture, "{0:#,###}", item1.Tien))</td>
+                                }
+                            }
+                        }
+                    </tr>
+                }
+                    <tr style="font-weight:bold">
+                        <td>2</td>
+                        <td>Vận chuyển</td>
+                        <td></td>
+                        <td></td>
+                        @foreach (var item in ViewBag.NCC)
+                        {
+                            if (getDGTM.Count>0)
+                            {
+                            <td colspan="2">@(getDGTM.Where(m => m.Ma_NCC == item.Ma_NCC).Select(m => m.Van_Chuyen).FirstOrDefault()? "Đã bao gồm" : "Không bao gồm")</td>
+                            }
+                            else
+                            { <td colspan="2">Đã bao gồm</td>}
+}
+                    </tr>
+                <tr style="font-weight:bold">
+                    <td>3</td>
+                    <td>Thuế 10%</td>
+                    <td></td>
+                    <td></td>
+                    <td colspan="2" class="subtotal"></td>
+                    <td colspan="2" class="subtotal"></td>
+                    <td colspan="2" class="subtotal"></td>
+                </tr>
+                <tr style="font-weight:bold">
+                    <td>4</td>
+                    <td>Tổng cộng</td>
+                    <td></td>
+                    <td></td>
+                    <td colspan="2" class="total"></td>
+                    <td colspan="2" class="total"></td>
+                    <td colspan="2" class="total"></td>
+                </tr>
+                <tr style="font-weight:bold">
+                    <td>5</td>
+                    <td>Thời gian</td>
+                    <td></td>
+                    <td></td>
+                    @foreach (var item in ViewBag.NCC)
+                    {
+                        <td colspan="2">@(getDGTM.Where(m => m.Ma_NCC == item.Ma_NCC).Select(m => m.Thoi_Gian).FirstOrDefault())</td>
+                    }
+                </tr>
+                <tr style="font-weight:bold">
+                    <td>6</td>
+                    <td>Địa điểm</td>
+                    <td></td>
+                    <td></td>
+                    @foreach (var item in ViewBag.NCC)
+                    {
+                        <td colspan="2">@(getDGTM.Where(m => m.Ma_NCC == item.Ma_NCC).Select(m => m.Dia_Diem).FirstOrDefault())</td>
+                    }
+                </tr>
+                <tr style="font-weight:bold">
+                    <td>7</td>
+                    <td>Hiệu lực</td>
+                    <td></td>
+                    <td></td>
+                    @foreach (var item in ViewBag.NCC)
+                    {
+                        <td colspan="2">@(getDGTM.Where(m => m.Ma_NCC == item.Ma_NCC).Select(m => m.Hieu_Luc).FirstOrDefault())</td>
+                    }
+                </tr>
+
+                <tr style="font-weight:bold">
+                    <td>8</td>
+                    <td>Điều kiện</td>
+                    <td></td>
+                    <td></td>
+                    @foreach (var item in ViewBag.NCC)
+                    {
+                        <td colspan="2">@(getDGTM.Where(m => m.Ma_NCC == item.Ma_NCC).Select(m => m.Dieu_Kien).FirstOrDefault())</td>
+                    }
+                </tr>
+                
+                <tr style="font-weight:bold">
+                    <td>9</td>
+                    <td>Bảo hành</td>
+                    <td></td>
+                    <td></td>
+                    @foreach (var item in ViewBag.NCC)
+                    {
+                        <td colspan="2">@(getDGTM.Where(m => m.Ma_NCC == item.Ma_NCC).Select(m => m.BH).FirstOrDefault())</td>
+                    }
+                </tr>
+                <tr style="font-weight:bold">
+                    <td>10</td>
+                    <td>Chế độ</td>
+                    <td></td>
+                    <td></td>
+                    @foreach (var item in ViewBag.NCC)
+                    {
+                        <td colspan="2">@(getDGTM.Where(m => m.Ma_NCC == item.Ma_NCC).Select(m => m.Che_Do).FirstOrDefault())</td>
+                    }
+                </tr>
+                <tr style="font-weight:bold">
+                    <td>11</td>
+                    <td>Ghi chú</td>
+                    <td></td>
+                    <td></td>
+                    @foreach (var item in ViewBag.NCC)
+                    {
+                        <td colspan="2">@(getDGTM.Where(m => m.Ma_NCC == item.Ma_NCC).Select(m => m.Ghi_Chu).FirstOrDefault())</td>
+                    }
+                </tr>
+                @*Đánh giá  chung*@
+                <tr style="background-color:burlywood;font-weight:bold;text-align:center" data-id="0">
+
+                    <td colspan="4">Đánh giá chung</td>
+                    @foreach (var item in ViewBag.NCC)
+                    {
+                        <td colspan="2">@(item.DG_TM == null ? "" : item.DG_TM)</td>
+
+                    }
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@Html.Partial("~/Views/Shared/_Modal.cshtml")

@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE HTML>
 @using Data.Data;
-@{ 
+@{
     AppUser model = new AppUser();
     if (Request.IsAuthenticated)
     {
@@ -32,7 +32,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- //lined-icons -->
     <!-- chart -->
     <script src="~/Scripts/asset/Chart.js"></script>
-   
+
     <!-- //chart -->
     <!--animate-->
     <link href="~/Content/animate.css" rel="stylesheet" />
@@ -46,15 +46,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href='//fonts.googleapis.com/css?family=Cabin:400,400italic,500,500italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
     <!---//webfonts--->
     <!-- Meters graphs -->
+    <!-- Datatable-->
+    <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+
+    <!--Section style-->
     @RenderSection("style", required: false)
     <script src="~/Scripts/jquery-3.2.1.min.js"></script>
-   
 
-
-    
     <!-- Placed js at the end of the document so the pages load faster -->
     <link rel="icon" href="~/images/Icon.jpg" sizes="32x32">
-
 </head>
 <body class="sticky-header left-side-collapsed">
     <section>
@@ -219,7 +221,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                             </li>
                                         </ul>
                                     </li>*@
-
                             </ul>
                         </div>
                         @Html.Partial("_PartialLogin", model)
@@ -244,7 +245,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <!--footer section end-->
         </div>
     </section>
-
 
     <script src="~/Scripts/asset/jquery.nicescroll.js"></script>
 
@@ -342,8 +342,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         }
     </script>
 
+    <!-- Moment JavaScript -->
     <script src="~/Scripts/moment.min.js"></script>
 
+    <!-- DataTables JavaScript-->
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.select.min.js"></script>
+    <!--Section Jquery-->
     @RenderSection("jfooter", required: false)
     <script src="~/Scripts/datetime-moment.js"></script>
 </body>

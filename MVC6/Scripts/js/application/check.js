@@ -6,13 +6,12 @@
             type: 'GET',
             dataType: 'JSON'
         },
-
         columns: [
             { data: null, orderable: false },
             { data: 'DeXuat' },
             { data: 'HopDong' },
             { data: 'Ten_NCC' },
-            { data: 'Ten_TB' },
+            { data: 'Ma_TB' },
             { data: 'YC_KT' },
             { data: 'TT_KT' },
             { data: 'YC_SL' },
@@ -81,18 +80,18 @@
                         return "<span onclick='viewreason("+row.Id+")'>Không Đạt</span>";
                     else return data;
                  }
-            },
-           
-            {
-                data: 'Id', render: function (data) {
-                    return "<button class='btn-sm btn-success' onclick='detail(" + data + ")' ><span class='fa fa-pencil-square-o'></span></button> | <button class='btn btn-danger' onclick='deletedata(" + data + ")' ><span class='fa fa-trash-o'></span></button>";
-
-                }, orderable: false
             }
+           
+         
         ],
+        select: {
+            style: 'single'
+        },
         scrollX: true,
         order: [[1, 'asc']]
+        
     });
+    $('[data-toggle="tooltip"]').tooltip();
     table.on('order.dt search.dt', function () {
         table.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
             cell.innerHTML = i + 1;
@@ -130,6 +129,7 @@
             .append("<div>Tên: " + item.FullName + "<br>Email: " + item.Email + "</div>")
             .appendTo(ul);
     };
+    CcAuto("#Cc");
     $("#formemail").validate({
         rules: {
             name: "required"
@@ -139,7 +139,16 @@
         }
     });
 });
-
+// Chọn dự liệu
+function getdata() {
+    var ma = table.row('.selected').data();
+    if (ma === undefined) {
+        bootbox.alert("Bạn chưa chọn dữ liệu");
+        return false;
+    }
+    detail(ma.Id);
+}
+// Dữ liệu chi tiết
 function detail(ma) {
     $.ajax({
         url: '/Requests/DetailCheck',
@@ -161,6 +170,7 @@ function detail(ma) {
         }
     });
 }
+// Lưu dữ liệu
 function save() {
     var form = $('#checkform').closest('form');
     form.removeData('validator');
@@ -196,13 +206,20 @@ function save() {
     });
 
 }
-function deletedata(ma) {
-        bootbox.confirm("Bạn Muốn Xóa Cái Này", function (result) {
+// Xóa dữ liệu
+function deletedata() {
+    var ma = table.row('.selected').data();
+    var data = table.cells('.selected', '').render('display');
+    if (ma === undefined) {
+        bootbox.alert("Bạn chưa chọn dữ liệu");
+        return false;
+    }
+        bootbox.confirm("Bạn muốn xóa dữ liệu này", function (result) {
             if (result) {
                 $.ajax({
                     url: '/Requests/DeleteCheck',
                     type: 'POST',
-                    data: { ma: ma },
+                    data: { ma: ma.Id },
                     success: function (data) {
                         if (data.status) {
                             $('#myModal').modal('hide');
@@ -221,6 +238,9 @@ function deletedata(ma) {
             }
         });
 }
+
+
+// Gửi Email yêu cầu
 function sendemail() {
     
     if (!$('#formemail').valid()) {
@@ -238,6 +258,7 @@ function sendemail() {
     formdata.append("name", $('#txtuser').val() );
     formdata.append("email", $('#txtemail').val());
     formdata.append("Id", $('#Id').val());
+    formdata.append("Cc", $('#Cc').val());
     formdata.append("file", file[0]);
     $.ajax({
         url: '/Requests/SendEmail',
@@ -262,7 +283,8 @@ function sendemail() {
         }
 
     });
- }
+}
+// Xem lý do & ghi chú
 function viewreason(ma) {
     $.ajax({
         url: '/Approvals/LoadReason',
@@ -270,7 +292,7 @@ function viewreason(ma) {
         type: 'GET',
         success: function (data) {
 
-            if (data.reason !== '') {
+            if (data.reason !== null) {
                 bootbox.dialog({
                     message: data.reason
                 });
@@ -294,7 +316,7 @@ function viewnote(ma) {
         data: { ma: ma },
         type: 'GET',
         success: function (data) {
-            if (data.reason !== '') {
+            if (data.reason !== null) {
                 bootbox.dialog({
                     message: data.reason
                 });
@@ -311,4 +333,51 @@ function viewnote(ma) {
             });
         }
     });
+}
+function ShowModal(id) {
+    $(id).modal('show');
+}
+function CcAuto(id) {
+    $(id).autocomplete({
+        source: function (request, response) {
+
+            $.ajax({
+                url: '/Requests/ListEmail',
+                dataType: 'JSON',
+                data: { a: request.term.split(";").pop() },
+                success: function (data) {
+                    response(data);
+                    //response($.map(data, function (item) {
+
+                    //    return { lable: item.FullName, value: item.UserName };
+
+                    //}));
+                }
+            });
+        },
+        focus: function (event, ui) {
+            //var term = $("#Cc").val().split(";");
+            //term.pop();
+            // term.push(ui.item.Email);
+            // term.push("");
+            // $("#Cc").val(term.join(";"));
+            return false;
+        },
+        select: function (event, ui) {
+
+            var term = $(id).val().split(";");
+            term.pop();
+            term.push(ui.item.Email);
+            term.push("");
+
+            $(id).val(term.join(";"));
+
+            return false;
+        },
+        appendTo: "#modalemail"
+    }).autocomplete("instance")._renderItem = function (ul, item) {
+        return $("<li>")
+            .append("<div>Tên: " + item.FullName + "<br>Email: " + item.Email + "</div>")
+            .appendTo(ul);
+    };
 }

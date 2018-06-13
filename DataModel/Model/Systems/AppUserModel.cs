@@ -42,10 +42,11 @@ namespace DataModel.Model.Systems
         [Display(Name = "Tài Khoản")]
         [Remote("CheckExist","Users",ErrorMessage ="Tài Khoản này đã tồn tại")]
         public string UserName { get; set; }
+        public string Ten_BP { get; set; }
         [Required(ErrorMessage = "Yêu Cầu Chọn Phòng Ban")]
         [Display(Name = "Phòng Ban")]
         public string Ma_BP { get; set; }
-        
+        public string Ten_To { get; set; }
         [Display(Name = "Tổ")]
         public string Ma_TO { get; set; }
         [Required(ErrorMessage = "Yêu Cầu Chọn Chức vụ")]

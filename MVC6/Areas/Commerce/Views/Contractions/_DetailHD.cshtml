@@ -1,0 +1,104 @@
+﻿@model DataModel.Model.Trade.DeXuatHDModel
+@{
+    var selectlist = new SelectList(
+                new List<SelectListItem> {
+
+           new SelectListItem{Text="A",Value="A"},
+           new SelectListItem{Text="B",Value="B"},
+           new SelectListItem{Text="C",Value="C"},
+                }, "Value", "Text");
+
+    int TongDiem;
+    TongDiem = (Model.Thai_Do + Model.Gia_Ca) * 2 + (Model.Chat_luong + Model.Tien_Do) * 3;
+}
+<form class="form-horizontal" id="contractform">
+    @Html.HiddenFor(m => m.Id)
+    <div class="form-group">
+        @Html.LabelFor(m => m.So_HD, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.HiddenFor(m => m.So_HD)
+            <input type="text" id="Ten_HD" value="@Model.Ten_HD"@(Model.So_HD>0?"readonly":"") class="form-control" />
+            @Html.ValidationMessageFor(m => m.So_HD, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Date, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Date,"{0:dd/MM/yyyy}", new { @class = "form-control datepicker" })
+            @Html.ValidationMessageFor(m => m.Date, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.DeXuatId, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.HiddenFor(m => m.DeXuatId)
+            <input type="text" id="Ten_Dx" value="@Model.TenDeXuat" class="form-control" />
+            @Html.ValidationMessageFor(m => m.DeXuatId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Người thực hiện</label>
+        <div class="col-md-10">
+            <input type="text" id="Nguoi_TH" value="@Model.Ten_TH" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Ma_NCC, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.HiddenFor(m=>m.Ma_NCC)
+            <input type="text" id="Ten_NCC" value="@Model.Ten_NCC" class="form-control" />
+            @Html.ValidationMessageFor(m => m.Ma_NCC, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    @* Đánh giá*@
+    <div class="row col-md-12">
+        <div class="form-group">
+            @Html.LabelFor(m => m.Chat_luong, new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.Chat_luong, new { @class = "form-control Tong", type="Number" })
+                @Html.ValidationMessageFor(m => m.Chat_luong, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(m => m.Tien_Do, new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.Tien_Do, new { @class = "form-control Tong", type = "Number" })
+                @Html.ValidationMessageFor(m => m.Tien_Do, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row col-md-12">
+        <div class="form-group">
+            @Html.LabelFor(m => m.Gia_Ca, new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.Gia_Ca, new { @class = "form-control Tong", type = "Number" })
+                @Html.ValidationMessageFor(m => m.Gia_Ca, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(m => m.Thai_Do, new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.Thai_Do, new { @class = "form-control Tong", type = "Number" })
+                @Html.ValidationMessageFor(m => m.Thai_Do, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row col-md-12">
+        <div class="form-group">
+            <label class="control-label col-md-2">Tổng điểm</label>
+            <div class="col-md-4">
+                <input type="text" id="Tong_Diem" value="@TongDiem" class="form-control" />
+            </div>
+            @Html.LabelFor(m => m.Diem, new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(m => m.Diem, selectlist,"-- Chọn ---", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Diem, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+        
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Lưu" onclick="savedata()" class="btn btn-success" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+</form>

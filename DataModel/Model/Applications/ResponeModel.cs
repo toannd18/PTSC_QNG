@@ -13,10 +13,13 @@ namespace DataModel.Model.Applications
         public string Dia_Diem { get; set; }
         public Nullable<DateTime> Date { get; set; }
         public string FullName { get; set; }
+        public string FullName_1 { get; set; }
         public string User_Nhap { get; set; }
-        public string Date_Autho { get; set; }
+        public Nullable<DateTime> Date_Autho { get; set; }
         public string Url { get; set; }
         public string UrlFile { get; set; }
         public string Hang_Muc { get; set; }
+        public string Ket_Qua { get; set; }
+        public string Ghi_Chu { get; set; }
     }
 }

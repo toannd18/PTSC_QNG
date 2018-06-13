@@ -18,33 +18,43 @@
                     return moment(data).format("DD/MM/YYYY");
                 }
             },
-            {data:'FullName'},
+            { data: 'FullName' },
+
+            {data: 'Date_Autho', render: function (data) {
+                      return moment(data).format("DD/MM/YYYY");
+               }
+            },
+            { data: 'FullName_1' },
             {
                 data: 'Status_Autho', render: function (data) {
                     if (data === "A") {
-                        return "<span class='fa fa-check-circle' style='color:forestgreen'>Đã Duyệt</span>";
+                        return "<span class='fa fa-check-circle' style='color:forestgreen'>Đạt</span>";
                     }
                     else if (data === "R") {
-                        return "<span class='fa fa-times-circle' style='color:red'>Từ Chối</span>";
+                        return "<span class='fa fa-times-circle' style='color:red'>Không đạt</span>";
                     }
                     else if (data === "W") {
-                        return "<span class='fa fa-times-circle' style='color:blue'>Đã Kiểm Tra Thực Tế</span>";
+                        return "<span class='fa fa-times-circle' style='color:blue'>Đạt một phần</span>";
                     }
                     else {
-                        return "<span class='fa fa-spinner' style='color:yellow'>Đang Chờ</span>";
+                        return "<span class='fa fa-spinner' style='color:SlateBlue'>Đang Chờ</span>";
                     }
                 }, orderable: false
             },
             {
                 data: 'Id', render: function (data) {
-                    return "<button class='btn-sm btn-success' onclick='detail(" + data + ")' ><span class='fa fa-pencil-square-o'></span></button> | <button class='btn btn-danger' onclick='deletedata(" + data + ")' ><span class='fa fa-trash-o'></span></button> | <a href= '/Requests/CheckList?ma="+data+"' class='btn btn-info' ><span class='fa fa-info-circle'></span></a >";
-                }, orderable: false, width:'15%'
+                    return "<button class='btn-sm btn-success' data-toggle='tooltip' title='Sửa' onclick='detail(" + data + ")' ><span class='fa fa-pencil-square-o'></span></button> | <button class='btn btn-danger' data-toggle='tooltip' title='Xóa' onclick='deletedata(" + data + ")' ><span class='fa fa-trash-o'></span></button> | <a href= '/Requests/CheckList?ma=" + data + "' class='btn btn-info' data-toggle='tooltip' title='Chi tiết' ><span class='fa fa-info-circle'></span></a >";
+                }, orderable: false, width: '15%'
             }
         ]
+        
     });
+    table.on('order.dt search.dt', function () {
+
+        $('[data-toggle="tooltip"]').tooltip();
+    }).draw();
 });
 $(document).ajaxComplete(function () {
-    
     $('#Other').change(function () {
         if ($(this).is(":checked")) {
             $('#Note').prop("readonly", false);
@@ -73,6 +83,7 @@ function detail(ma) {
                 form.removeData('validator');
                 form.removeData('unobtrusiveValidation');
                 $.validator.unobtrusive.parse(form);
+                checkma();
             }
         },
         error: function (ex) {
@@ -107,7 +118,6 @@ function save() {
                 form.removeData('unobtrusiveValidation');
                 $.validator.unobtrusive.parse(form);
             }
-
         },
         error: function (ex) {
             console.log(ex);
@@ -147,4 +157,18 @@ function deletedata(ma) {
         }
     });
 }
-
+function checkma() {
+    $("#Ma_BP").change(function () {
+        var ma = $(this).val();
+        $.ajax({
+            url: '/Requests/Change_Id',
+            type: 'Get',
+            data: { ma: ma },
+            success: function (count) {
+                var id = count + "-Y4CKT-" + ma;
+                $("#LateId").val(id);
+                $("#FirstId").val(count);
+            }
+        });
+    });
+}

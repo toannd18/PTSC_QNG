@@ -32,6 +32,7 @@ namespace DataService.Dao.Applications
                 tbl = (from l in db.tbl_List_Request
                        join d in db.tbl_BP on l.Ma_BP equals d.Ma_BP
                        join u in sub on l.User_Nhap equals u.UserName
+                       join u1 in sub on l.User_Autho equals u1.UserName
                        where (u.Ma_BP == sub.Where(m => m.UserName == user).Select(m => m.Ma_BP).FirstOrDefault() &&
                        u.Display < sub.Where(m => m.UserName == user).Select(m => m.Display).FirstOrDefault()) ||
                        l.User_Autho == user|| l.User_Edit==user
@@ -59,7 +60,8 @@ namespace DataService.Dao.Applications
                            Status_Autho = l.Status_Autho,
                            Note_Autho = l.Note_Autho,
                            Date = l.Date,
-                           FullName = u.FullName
+                           FullName = u.FullName,
+                           FullName_1=u1.FullName
                        }).ToList();
             }
             else
@@ -67,6 +69,7 @@ namespace DataService.Dao.Applications
                 tbl = (from l in db.tbl_List_Request
                        join d in db.tbl_BP on l.Ma_BP equals d.Ma_BP
                        join u in sub on l.User_Nhap equals u.UserName
+                       join u1 in sub on l.User_Autho equals u1.UserName
                        where (u.Ma_TO == sub.Where(m => m.UserName == user).Select(m => m.Ma_TO).FirstOrDefault() &&
                        u.Display < sub.Where(m => m.UserName == user).Select(m => m.Display).FirstOrDefault()) ||
                        l.User_Edit == user||l.User_Autho==user
@@ -94,7 +97,8 @@ namespace DataService.Dao.Applications
                            Status_Autho = l.Status_Autho,
                            Note_Autho = l.Note_Autho,
                            Date = l.Date,
-                           FullName = u.FullName
+                           FullName = u.FullName,
+                           FullName_1=u1.FullName
                        }).ToList();
             }
             return tbl;

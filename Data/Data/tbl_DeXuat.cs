@@ -23,6 +23,7 @@ namespace Data.Data
         public string Ten_Dg1 { get; set; }
         public string Ten_Dg2 { get; set; }
         public string Ten_Dg3 { get; set; }
+        public string Ten_Dg4 { get; set; }
         public DateTime? Ngay_Tao { get; set; }
         public DateTime? Ngay_Exp { get; set; }
         public DateTime? Ngay_Eval { get; set; }
@@ -30,6 +31,13 @@ namespace Data.Data
         public DateTime? Ngay_PD { get; set; }
         public DateTime? Ngay_HD { get; set; }
         public DateTime? Ngay_PHD { get; set; }
+        public DateTime? Ngay_Ky { get; set; }
+        public DateTime? Ngay_TH { get; set; }
+        public DateTime? Ngay_THTT { get; set; }
+        public DateTime? Ngay_NT { get; set; }
+        public DateTime? Ngay_NT_QC { get; set; }
+        public bool Status { get; set; }
+        public string Ghi_Chu { get; set; }
 
     }
 }

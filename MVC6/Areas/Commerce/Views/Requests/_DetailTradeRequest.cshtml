@@ -2,17 +2,18 @@
 @{ 
     var selectlist = new SelectList(
                 new List<SelectListItem> {
-                 
+
                    new SelectListItem{Text="Hàng hóa",Value=true.ToString()},
                    new SelectListItem{Text="Dịch vụ",Value=false.ToString()}
                 }, "Value", "Text");
+    var user = ViewBag.User as List<Data.Data.AppUser>;
 }
 
 <form id="traderequestform">
    
     @Html.HiddenFor(model=>model.Id)
     <div class="form-horizontal">
-        
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Ma, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -33,15 +34,16 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Kieu, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.Kieu, selectlist , new { @class = "form-control" } )
-                    @Html.ValidationMessageFor(model => model.Kieu, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.Kieu, selectlist, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Kieu, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Ten_Dx, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Ten_Dx, new { htmlAttributes = new { @class = "form-control" } })
+                <input type="text" class="form-control" id="subTen_Dx" value="@user.Where(m=>m.UserName==Model.Ten_Dx).Select(m=>m.FullName).FirstOrDefault()" />
+                @Html.EditorFor(model => model.Ten_Dx, new { htmlAttributes = new { @class = "form-control", @type = "hidden" } })
                 @Html.ValidationMessageFor(model => model.Ten_Dx, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -49,7 +51,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Ten_Dx1, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Ten_Dx1, new { htmlAttributes = new { @class = "form-control" } })
+                <input type="text" class="form-control" id="subTen_Dx1" value="@user.Where(m=>m.UserName==Model.Ten_Dx1).Select(m=>m.FullName).FirstOrDefault()" />
+                @Html.EditorFor(model => model.Ten_Dx1, new { htmlAttributes = new { @class = "form-control", @type = "hidden" } })
                 @Html.ValidationMessageFor(model => model.Ten_Dx1, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -57,7 +60,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Ten_Dx2, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Ten_Dx2, new { htmlAttributes = new { @class = "form-control" } })
+                <input type="text" class="form-control" id="subTen_Dx2" value="@user.Where(m=>m.UserName==Model.Ten_Dx2).Select(m=>m.FullName).FirstOrDefault()" />
+                @Html.EditorFor(model => model.Ten_Dx2, new { htmlAttributes = new { @class = "form-control", @type = "hidden" } })
                 @Html.ValidationMessageFor(model => model.Ten_Dx2, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -65,7 +69,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Ten_Dx3, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Ten_Dx3, new { htmlAttributes = new { @class = "form-control" } })
+                <input type="text" class="form-control" id="subTen_Dx3" value="@user.Where(m=>m.UserName==Model.Ten_Dx3).Select(m=>m.FullName).FirstOrDefault()" />
+                @Html.EditorFor(model => model.Ten_Dx3, new { htmlAttributes = new { @class = "form-control", @type = "hidden" } })
                 @Html.ValidationMessageFor(model => model.Ten_Dx3, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -73,7 +78,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Ten_Dx4, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Ten_Dx4, new { htmlAttributes = new { @class = "form-control" } })
+                <input type="text" class="form-control" id="subTen_Dx4" value="@user.Where(m=>m.UserName==Model.Ten_Dx4).Select(m=>m.FullName).FirstOrDefault()" />
+                @Html.EditorFor(model => model.Ten_Dx4, new { htmlAttributes = new { @class = "form-control", @type = "hidden" } })
                 @Html.ValidationMessageFor(model => model.Ten_Dx4, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -81,7 +87,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Ten_Dx5, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Ten_Dx5, new { htmlAttributes = new { @class = "form-control" } })
+                <input type="text" class="form-control" id="subTen_Dx5" value="@user.Where(m=>m.UserName==Model.Ten_Dx5).Select(m=>m.FullName).FirstOrDefault()" />
+                @Html.EditorFor(model => model.Ten_Dx5, new { htmlAttributes = new { @class = "form-control", @type = "hidden" } })
                 @Html.ValidationMessageFor(model => model.Ten_Dx5, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -89,42 +96,57 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Ten_Dg, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Ten_Dg, new { htmlAttributes = new { @class = "form-control" } })
+                <input type="text" class="form-control" id="subTen_Dg" value="@user.Where(m=>m.UserName==Model.Ten_Dg).Select(m=>m.FullName).FirstOrDefault()" />
+                @Html.EditorFor(model => model.Ten_Dg, new { htmlAttributes = new { @class = "form-control", @type = "hidden" } })
                 @Html.ValidationMessageFor(model => model.Ten_Dg, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Ten_Dg1, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Ten_Dg1, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Ten_Dg1, "", new { @class = "text-danger" })
+
+        @*Thương mại*@
+        <div class="row col-md-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Ten_Dg1, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4" style="padding-right:unset">
+                    <input type="text" class="form-control" id="subTen_Dg1" value="@user.Where(m=>m.UserName==Model.Ten_Dg1).Select(m=>m.FullName).FirstOrDefault()" />
+                    @Html.EditorFor(model => model.Ten_Dg1, new { htmlAttributes = new { @class = "form-control", @type = "hidden" } })
+                    @Html.ValidationMessageFor(model => model.Ten_Dg1, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.Ten_Dg3, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4" style="padding-right:unset">
+                    <input type="text" class="form-control" id="subTen_Dg3" value="@user.Where(m=>m.UserName==Model.Ten_Dg3).Select(m=>m.FullName).FirstOrDefault()" />
+                    @Html.EditorFor(model => model.Ten_Dg3, new { htmlAttributes = new { @class = "form-control", @type = "hidden" } })
+                    @Html.ValidationMessageFor(model => model.Ten_Dg3, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Ten_Dg2, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Ten_Dg2, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Ten_Dg2, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Ten_Dg3, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Ten_Dg3, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Ten_Dg3, "", new { @class = "text-danger" })
+        @*Kỹ thuật*@
+        <div class="row col-md-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Ten_Dg2, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4" style="padding-right:unset">
+                    <input type="text" class="form-control" id="subTen_Dg2" value="@user.Where(m=>m.UserName==Model.Ten_Dg2).Select(m=>m.FullName).FirstOrDefault()" />
+                    @Html.EditorFor(model => model.Ten_Dg2, new { htmlAttributes = new { @class = "form-control", @type = "hidden" } })
+                    @Html.ValidationMessageFor(model => model.Ten_Dg2, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.Ten_Dg4, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4" style="padding-right:unset">
+                    <input type="text" class="form-control" id="subTen_Dg4" value="@user.Where(m=>m.UserName==Model.Ten_Dg4).Select(m=>m.FullName).FirstOrDefault()" />
+                    @Html.EditorFor(model => model.Ten_Dg4, new { htmlAttributes = new { @class = "form-control", @type = "hidden" } })
+                    @Html.ValidationMessageFor(model => model.Ten_Dg4, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Ngay_Tao, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Ngay_Tao, "{0:dd/MM/yyyy}",  new { @class = "form-control datepicker"} )
+                @Html.TextBoxFor(model => model.Ngay_Tao, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker" })
                 @Html.ValidationMessageFor(model => model.Ngay_Tao, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        @*Ngày Nộp Chào Giá*@
         <div class="row col-md-12">
             <div class="form-group">
                 @Html.LabelFor(model => model.Ngay_Gui, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -132,39 +154,54 @@
                     @Html.TextBoxFor(model => model.Ngay_Gui, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker" })
                     @Html.ValidationMessageFor(model => model.Ngay_Gui, "", new { @class = "text-danger" })
                 </div>
+                @Html.LabelFor(model => model.Ngay_Exp, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.Ngay_Exp, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker" })
+                    @Html.ValidationMessageFor(model => model.Ngay_Exp, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        @*Ngày Đánh giá*@
+        <div class="row col-md-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Ngay_Eval, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.Ngay_Eval, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker" })
+                    @Html.ValidationMessageFor(model => model.Ngay_Eval, "", new { @class = "text-danger" })
+                </div>
                 @Html.LabelFor(model => model.Ngay_PD, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
                     @Html.TextBoxFor(model => model.Ngay_PD, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker" })
                     @Html.ValidationMessageFor(model => model.Ngay_PD, "", new { @class = "text-danger" })
                 </div>
             </div>
-
-          
         </div>
 
+        @*Ngay Ky Hop Dong*@
         <div class="row col-md-12">
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Ngay_HD, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
-                    @Html.TextBoxFor(model => model.Ngay_HD, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker" } )
+                    @Html.TextBoxFor(model => model.Ngay_HD, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker" })
                     @Html.ValidationMessageFor(model => model.Ngay_HD, "", new { @class = "text-danger" })
                 </div>
                 @Html.LabelFor(model => model.Ngay_PHD, new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
-                    @Html.TextBoxFor(model => model.Ngay_PHD, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker" } )
+                    @Html.TextBoxFor(model => model.Ngay_PHD, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker" })
                     @Html.ValidationMessageFor(model => model.Ngay_PHD, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            
+
         </div>
 
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="button" value="Lưu" onclick="savedata()" class="btn btn-success" />
-                <button type="button" class="btn btn-default" data-dismiss="modal">ĐÓng</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
             </div>
         </div>
     </div>

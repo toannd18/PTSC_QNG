@@ -1,0 +1,44 @@
+﻿@model Data.Data.tbl_DG_KT
+<div class="alert" id="Alert" role="alert" style="display:none">
+
+</div>
+<form class="form-horizontal" id="dgtmtble">
+    @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.DeXuatId)
+    @Html.HiddenFor(m => m.DG_KT_Id)
+    <div class="form-group">
+        <label class="control-label col-md-2">Nhà cung cấp</label>
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.DG_NCC_Id, ViewBag.NCC as SelectList, "-- Chọn --", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.DG_NCC_Id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Tên</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Ten, new { @class = "form-control", @readonly = "readonly" })
+            @Html.ValidationMessageFor(m => m.Ten, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Mô tả</label>
+        <div class="col-md-10">
+            @Html.TextAreaFor(m => m.Mo_Ta, new { @class = "form-control", @readonly = "readonly" })
+            @Html.ValidationMessageFor(m => m.Mo_Ta, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Đơn giá</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Don_Gia, new { @class = "form-control", @type = "Number" })
+            @Html.ValidationMessageFor(m => m.Don_Gia, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="button" class="btn btn-info" onclick="savedata()" value="Lưu">
+            <button class="btn btn-default" data-dismiss="modal">Đóng</button>
+        </div>
+    </div>
+</form>

@@ -17,13 +17,13 @@ namespace Data.Data
         public string Ma_NCC { get; set; }
 
         [Required]
-        [StringLength(10)]
+        [StringLength(50)]
         public string Ma_TB { get; set; }
 
-        [Required]
+      
         public string YC_KT { get; set; }
 
-        [Required]
+       
         public string TT_KT { get; set; }
 
         public int YC_SL { get; set; }

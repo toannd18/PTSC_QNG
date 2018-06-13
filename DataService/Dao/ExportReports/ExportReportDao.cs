@@ -57,6 +57,42 @@ namespace DataService.Dao.ExportReports
                               }).FirstOrDefault();
             return user;
         }
+        public List<ExportCustomer> ExportSupplier(int dx)
+        {
+            var model = (from t in db.tbl_DeXuat
+                         join ncc in db.tbl_DG_NCC on t.Id equals ncc.DeXuatId
+                         join n in db.tbl_NCC on ncc.Ma_NCC equals n.Ma_NCC
+                         where t.Id == dx
+                         select new ExportCustomer
+                         {
+                             Ma = t.Ma,
+                             Tieu_De = t.Tieu_De,
+                             Kieu = t.Kieu,
+                             DG = t.Ten_Dg,
+                             DG1 = t.Ten_Dg1,
+                             DG2 = t.Ten_Dg2,
+                             DG3 = t.Ten_Dg3,
+                             Ngay_Tao = t.Ngay_Tao,
+                             Ngay_Gui = t.Ngay_Gui,
+                             Ngay_Exp = t.Ngay_Exp,
+                             Ngay_Eval = t.Ngay_Eval,
+                             Ngay_PD = t.Ngay_PD,
+                             Ngay_HD = t.Ngay_HD,
+                             Ngay_PHD = t.Ngay_PHD,
+                             Ten = n.Ten_NCC,
+                             Ma_NCC = n.Ma_NCC,
+                             Tel = n.Tel,
+                             Fax = n.Fax,
+                             Attn = n.Attn,
+                             Email = n.Email,
+                             Dia_Chi = n.Dia_Chi,
+                             DG_Chung=ncc.DG,
+                             DG_TM=ncc.DG_TM,
+                             DG_KT=ncc.DG_KT
+                         }).OrderBy(m=>m.Ma_NCC).ToList();
+            return model;
+        }
+       
     }
     public class LevelUser
     {
@@ -64,5 +100,33 @@ namespace DataService.Dao.ExportReports
         public string Ma_BP { get; set; }
         public string Ma_TO { get; set; }
         public int? Display { get; set; }
+    }
+    public class ExportCustomer
+    {
+        public string Ma { get; set; }
+        public string Tieu_De { get; set; }
+        public bool Kieu { get; set; }
+        public string DG { get; set; }
+        public string DG1 { get; set; }
+        public string DG2 { get; set; }
+        public string DG3 { get; set; }
+        public DateTime? Ngay_Tao { get; set; }
+        public DateTime? Ngay_Gui { get; set; }
+        public DateTime? Ngay_Exp { get; set; }
+        public DateTime? Ngay_Eval { get; set; }
+        public DateTime? Ngay_PD { get; set; }
+        public DateTime? Ngay_HD { get; set; }
+        public DateTime? Ngay_PHD { get; set; }
+        public string Ten { get; set; }
+        public string Ma_NCC { get; set; }
+        public string Tel { get; set; }
+        public string Fax { get; set; }
+        public string Attn { get; set; }
+        public string Email { get; set; }
+        public int? DG_Chung { get; set; }
+        public int? DG_TM { get; set; }
+        public bool? DG_KT { get; set; }
+        public string Dia_Chi { get; set; }
+
     }
 }

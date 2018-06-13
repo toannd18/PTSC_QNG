@@ -18,7 +18,7 @@ namespace DataModel.Model.Systems
         [Display(Name = "Tên Hàng Hóa")]
         public string Ma_TB { get; set; }
 
-        public string Ten_TB { get; set; }
+        
         [Required(ErrorMessage = "Yêu Cầu Nhập Thông Số Kỹ Thuật", AllowEmptyStrings = false)]
         [Display(Name = "Kỹ Thuật Yêu Cầu")]
         public string YC_KT { get; set; }

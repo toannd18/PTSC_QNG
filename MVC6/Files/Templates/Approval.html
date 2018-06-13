@@ -1,4 +1,7 @@
 ﻿@model DataModel.Model.Applications.ResponeModel
+@if(!string.IsNullOrEmpty(Model.Ghi_Chu)){
+<p><span style="color:red">Ghi chú: </span>@Model.Ghi_Chu</p>
+}
 <div>
     <table border="1">
         <thead>
@@ -30,12 +33,12 @@
                 <td>@Model.Hang_Muc</td>
             </tr>
             <tr>
-                <td>Người Gửi</td>
+                <td>Người yêu cầu</td>
                 <td>@Model.FullName</td>
             </tr>
             <tr>
                 <td>Ngày Gửi</td>
-                <td>@Model.Date_Autho</td>
+                <td>@String.Format("{0:dd/MM/yyyy}",Model.Date_Autho)</td>
             </tr>
             <tr>
                 <td>Tài Liệu Đính Kèm</td>

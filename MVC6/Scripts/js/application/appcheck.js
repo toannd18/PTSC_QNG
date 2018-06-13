@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+//Draw DataTables
     table = $('#checktbl').DataTable({
         ajax: {
             url: '/Requests/LoadCheck',
@@ -12,7 +13,7 @@
             { data: 'DeXuat' },
             { data: 'HopDong' },
             { data: 'Ten_NCC' },
-            { data: 'Ten_TB' },
+            { data: 'Ma_TB' },
             { data: 'YC_KT' },
             { data: 'TT_KT' },
             { data: 'YC_SL' },
@@ -73,15 +74,12 @@
                     else if (data === false)
                         return "<span onclick='viewreason("+row.Id+")'>Không Đạt</span>";
                     else return data;
-                } },
-            {
-                data: 'Id', render: function (data) {
-                    return "<button class='btn-sm btn-success' onclick='detail(" + data + ")' ><span class='fa fa-pencil-square-o'></span></button>";
-
-                }, orderable: false
-            }
+                } }
+        
         ],
-      
+        select: {
+            style: 'single'
+        },
         scrollX: true,
         order: [[1, 'asc']]
     });
@@ -90,7 +88,11 @@
             cell.innerHTML = i + 1;
         });
         $('[data-toggle="popover"]').popover();
+      
     }).draw();
+
+//Others
+    $('[data-toggle="tooltip"]').tooltip();
     $("#name").autocomplete({
         source: function (request, response) {
             $.ajax({
@@ -123,6 +125,8 @@
             .append("<div>Tên: " + item.FullName + "<br>Email: " + item.Email + "</div>")
             .appendTo(ul);
     };
+
+    CcAuto("#Cc", "#modalreponse"); CcAuto("#Cc1", "#modalemail");
     $("#formemail").validate({
         rules: {
             name: "required"
@@ -132,10 +136,22 @@
         }
     });
 });
+
+
 $(document).ajaxComplete(function () {
     check();
    
 });
+// Chọn dự liệu
+function getdata() {
+    var ma = table.row('.selected').data();
+    if (ma === undefined) {
+        bootbox.alert("Bạn chưa chọn dữ liệu");
+        return false;
+    }
+    detail(ma.Id);
+}
+// Dữ liệu chi tiết
 function detail(ma) {
     $.ajax({
         url: '/Approvals/DetailCheck',
@@ -155,6 +171,7 @@ function detail(ma) {
         }
     });
 }
+// Lưu dữ liệu
 function save() {
     var form = $('#approvalform').closest('form');
     form.removeData('validator');
@@ -181,6 +198,7 @@ function save() {
         }
     });
 }
+// Function for check box
 function check() {
      
      if ($('#Other').is(":checked")) {
@@ -199,6 +217,7 @@ function check() {
      });
      if ($('#Result').val() === "true") {
          $('#Reason').prop("readonly", true);
+         $('#Reason').val("");
      }
      else {
          $('#Reason').prop("readonly", false);
@@ -212,49 +231,7 @@ function check() {
          }
      });
 }
-function sendemail(ma) {
-    bootbox.confirm("Bạn muốn gửi email phản hồi", function (result) {
-        if (result) {
-            var dialog = bootbox.dialog({
-                message: '<p><i class="fa fa-spin fa-spinner"></i>Làm ơn chờ để xử lý...</p>',
-                closeButton: false
-            });
-            var formdata = new FormData();
-            var file = $('#filename').get(0).files;
-            formdata.append("ma", ma);
-            formdata.append("code", $('#code').val());
-            formdata.append("file", file[0]);
-            $('#modalreponse').modal('hide');
-            $.ajax({
-                url: '/Approvals/SendEmail',
-                type: 'POST',
-                data: formdata,
-                contentType: false,
-                processData: false,
-                success: function (data) {
-                    dialog.modal('hide');
-                    if (data.status===true) {
-                        $.notify("Gửi email thành công", "success");
-                    }
-                    else if (data.status===false) {
-                        $.notify("Gửi email thất bại", "error");
-                    } else if (data.status === "Error") {
-                        bootbox.alert("Bạn Chưa Kiểm Tra Tất Cả Các Thiết Bị");
-                        
-                    }else
-                        bootbox.alert("Bạn Không thể thực hiện tác vụ này");
-
-                },
-                error: function (ex) {
-                    dialog.modal('hide');
-                    bootbox.alert(e);
-                }
-            });
-
-        }
-    });
-   
-}
+//Other Functions
 function viewreason(ma) {
     $.ajax({
         url: '/Approvals/LoadReason',
@@ -262,7 +239,7 @@ function viewreason(ma) {
         type: 'GET',
         success: function (data) {
             
-            if (data.reason !== '') {
+            if (data.reason !== null) {
                 bootbox.dialog({
                     message: data.reason
                 });
@@ -286,7 +263,7 @@ function viewnote(ma) {
         data: { ma: ma },
         type: 'GET',
         success: function (data) {
-            if (data.reason !== '') {
+            if (data.reason!==null) {
                 bootbox.dialog({
                     message: data.reason
                 });
@@ -320,6 +297,8 @@ function forwardemail() {
     formdata.append("name", $('#txtuser').val());
     formdata.append("email", $('#txtemail').val());
     formdata.append("Id", $('#Id').val());
+    formdata.append("Ghi_Chu", $('#ghi_chu').val());
+    formdata.append("Cc", $('#Cc1').val());
     $.ajax({
         url: '/Approvals/ForwardEmail',
         type: 'POST',
@@ -328,7 +307,7 @@ function forwardemail() {
         processData: false,
         success: function (data) {
             dialog.modal('hide');
-            if (data) {
+            if (data.status===true) {
                 $.notify("Gửi Email Thành Công", "success");
             } else if (data === "Error") {
                 bootbox.alert("Bạn Không thể thực hiện tác vụ này");
@@ -343,8 +322,100 @@ function forwardemail() {
 
     });
 }
+function sendemail(ma) {
+    bootbox.confirm("Bạn muốn gửi email phản hồi", function (result) {
+        if (result) {
+            var dialog = bootbox.dialog({
+                message: '<p><i class="fa fa-spin fa-spinner"></i>Làm ơn chờ để xử lý...</p>',
+                closeButton: false
+            });
+            var formdata = new FormData();
+            var file = $('#filename').get(0).files;
+            formdata.append("ma", ma);
+            formdata.append("code", $('#code').val());
+            formdata.append("Cc", $('#Cc').val());
+            formdata.append("file", file[0]);
+            $('#modalreponse').modal('hide');
+            $.ajax({
+                url: '/Approvals/SendEmail',
+                type: 'POST',
+                data: formdata,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    dialog.modal('hide');
+                    if (data.status === true) {
+                        $.notify("Gửi email thành công", "success");
+                    }
+                    else if (data.status === false) {
+                        $.notify("Gửi email thất bại", "error");
+                    } else if (data.status === "Error") {
+                        bootbox.alert("Bạn Chưa Kiểm Tra Tất Cả Các Thiết Bị");
+
+                    } else
+                        bootbox.alert("Bạn Không thể thực hiện tác vụ này");
+
+                },
+                error: function (ex) {
+                    dialog.modal('hide');
+                    bootbox.alert(e);
+                }
+            });
+
+        }
+    });
+
+}
+function ShowModal(id) {
+    $(id).modal('show');
+}
 function showmodal() {
     $('#modalreponse').modal('show');
     $('#filename').val('');
     $('#code').val('A');
+    $('#Cc').val('');
+}
+function CcAuto(id,modal) {
+    $(id).autocomplete({
+        source: function (request, response) {
+
+            $.ajax({
+                url: '/Requests/ListEmail',
+                dataType: 'JSON',
+                data: { a: request.term.split(";").pop() },
+                success: function (data) {
+                    response(data);
+                    //response($.map(data, function (item) {
+
+                    //    return { lable: item.FullName, value: item.UserName };
+
+                    //}));
+                }
+            });
+        },
+        focus: function (event, ui) {
+            //var term = $("#Cc").val().split(";");
+            //term.pop();
+            // term.push(ui.item.Email);
+            // term.push("");
+            // $("#Cc").val(term.join(";"));
+            return false;
+        },
+        select: function (event, ui) {
+
+            var term = $(id).val().split(";");
+            term.pop();
+            term.push(ui.item.Email);
+            term.push("");
+
+            $(id).val(term.join(";"));
+
+            return false;
+        },
+        appendTo: modal
+    }).autocomplete("instance")._renderItem = function (ul, item) {
+        return $("<li>")
+            .append("<div>Tên: " + item.FullName + "<br>Email: " + item.Email + "</div>")
+            .appendTo(ul);
+    };
 }
