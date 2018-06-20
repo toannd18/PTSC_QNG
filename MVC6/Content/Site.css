@@ -22,3 +22,11 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/* toolbox*/
+.toolbox {
+    position: fixed;
+    right: 10px;
+    bottom: 45%;
+    display: block
+}

@@ -23,7 +23,7 @@ namespace DataService.Dao.Systems
                 Ten_TO = m.Ten_TO,
                 Ma_BP = m.Ma_BP,
                 Ten_BP = m.tbl_BP.Ten_BP
-            }).ToList();
+            }).OrderBy(m=>m.Ma_BP).ThenBy(m=>m.Ten_TO).ToList();
             return tbl;  
         }
         public TeamModel detail(string ma)

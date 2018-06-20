@@ -4,9 +4,12 @@
     });
     tally('td.subtotal');
     $('#myModal').on("hidden.bs.modal", function (e) {
-        window.location.reload();
-    })
-
+        if (parseInt($('#dem').val()) !== 0) {
+            window.location.reload();
+        }
+        
+    });
+    $('[data-toggle="tooltip"]').tooltip();
 });
 //Nhập dữ liệu giá
 function getdata() {
@@ -153,6 +156,7 @@ function detailtm(ma){
         data: { NCC: ma, dx: $('#DeXuatId').val() },
         type: 'Get',
         success: function (data) {
+            Alert(true, true, "");
             if (data.status === false) {
                 $('#Id').val(0);
                 $('#Van_Chuyen').val("True");
@@ -205,6 +209,7 @@ function savetm() {
             else {
                 Alert(false, false, "Lỗi không thể lưu");
             }
+          
         },
         error: function (err) {
             bootbox.alert("Lỗi kết nối");
@@ -251,6 +256,7 @@ function savencc() {
             else {
                 Alert(false, false, "Lỗi không thể lưu");
             }
+            
         },
         error: function (err) {
             bootbox.alert("Lỗi kết nối");
@@ -282,6 +288,8 @@ function Alert(id, hiden, note) {
         return false;
     }
     alert.show();
+    var t = parseInt($('#dem').val());
+    $('#dem').val(t + 1);
     if (id === true) {
         alert.html(note);
         alert.removeClass("alert-danger").addClass("alert-success");

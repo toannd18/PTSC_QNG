@@ -3,8 +3,11 @@
         $(this).addClass("info").siblings().removeClass("info");
     });
     $('#myModal').on("hidden.bs.modal", function (e) {
-        window.location.reload();
+        if (parseInt($('#dem').val()) !== 0) {
+            window.location.reload();
+        }
     });
+    $('[data-toggle="tooltip"]').tooltip();
 });
 function getdata() {
     var t = $("#spectable >tbody >tr").filter(".info").data("id");
@@ -172,6 +175,8 @@ function Alert(id, hiden, note) {
         return false;
     }
     alert.show();
+    var t = parseInt($('#dem').val());
+    $('#dem').val(t + 1);
     if (id === true) {
         alert.html(note);
         alert.removeClass("alert-danger").addClass("alert-success");

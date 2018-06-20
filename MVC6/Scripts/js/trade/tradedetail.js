@@ -340,17 +340,7 @@ function savetm() {
     });
 }
 
-function loadanimate(data) {
-    var scrollpos;
-    if (data === 'home') {
-        scrollpos = 0;
-    }
-    else {
-        scrollpos = $(data).offset().top;
-    }
-    
-    $("html, body").animate({ scrollTop: scrollpos }, "500");
-}
+
 
 function savedg(ma, data) {
     $.ajax({

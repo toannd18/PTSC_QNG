@@ -1,18 +1,18 @@
 ﻿@model List<DataService.Dao.Trade.DGKTModel>
 @{
-    ViewBag.Title = "IndexSpec";
+    ViewBag.Title = "Đánh giá kỹ thuật";
     Layout = "~/Views/Shared/_Layoutadmin.cshtml";
 }
 
 @section style{
-  
+
 }
 @section jfooter{
 
-   
+
     <script src="~/Scripts/js/trade/evalue.js"></script>
 }
-<h3 class="blank1">Phiếu Đề Xuất</h3>
+<h3 class="blank1">Đánh Giá Kỹ Thuật</h3>
 <div class="bs-example4" data-example-id="simple-responsive-table">
     <div class="table-responsive">
         <div class="form-group">
@@ -46,7 +46,7 @@
                         <td>
                             <b>@Model[i].Ten:</b>
                             <br />
-                           @Model[i].MoTa
+                            @Model[i].MoTa
                         </td>
                         @foreach (var item in ViewBag.NCC)
                         {
@@ -55,9 +55,9 @@
                                 {
                                     if (item.Ma_NCC == item1.NCC)
                                     {
-                                    <b>@item1.Ten_DG:</b>
-                                    <br />
-                                    @item1.MoTa_DG
+                                        <b>@item1.Ten_DG:</b>
+                                        <br />
+                                        @item1.MoTa_DG
                                     }
                                 }
                             </td>
@@ -66,10 +66,10 @@
                                 {
                                     if (item.Ma_NCC == item1.NCC)
                                     {
-                                        @(item1.DG?"Đạt":"Không Đạt")
+                                        @(item1.DG ? "Đạt" : "Không Đạt")
                                         <br />
                                         @item1.Ghi_Chu
-                                       
+
                                     }
                                 }
                             </td>
@@ -82,7 +82,7 @@
                     <td colspan="2">Đánh giá chung</td>
                     @foreach (var item in ViewBag.NCC)
                     {
-                        <td colspan="2">@(item.DG_KT==null?"":(item.DG_KT ? "Đạt":"Không Đạt"))</td>
+                        <td colspan="2">@(item.DG_KT == null ? "" : (item.DG_KT ? "Đạt" : "Không Đạt"))</td>
 
                     }
                 </tr>
@@ -90,5 +90,12 @@
         </table>
     </div>
 </div>
-
+<input type="hidden" value="0" id="dem" />
+<!-- Toolbox-->
+<div id="toolbox" class="toolbox">
+    <div class="list-group">
+        <button type="button" class="list-group-item" data-toggle="tooltip" data-placement="top" title="Đầu trang" onclick="ptsc.loadanimate('home')"><span class="glyphicon glyphicon-arrow-up"></span></button>
+        <button type="button" class="list-group-item" onclick="getdata()" data-toggle="tooltip" data-placement="bottom" title="Đánh giá"><span class="glyphicon glyphicon-pencil"></span></button>
+    </div>
+</div>
 @Html.Partial("~/Views/Shared/_Modal.cshtml")

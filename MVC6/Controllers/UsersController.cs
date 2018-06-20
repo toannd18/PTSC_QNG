@@ -41,6 +41,14 @@ namespace MVC6.Controllers
             {
                 tbl = new UserDao().detail(ma);
             }
+            if (string.IsNullOrEmpty(tbl.Ma_BP))
+            {
+                ViewBag.Team = new SelectList(new TeamDao().load(), "Ma_TO", "Ten_TO");
+            }
+            else
+            {
+                ViewBag.Team = new SelectList(new TeamDao().load().Where(m => m.Ma_BP == tbl.Ma_BP), "Ma_TO", "Ten_TO");
+            }
             Bind();
             return PartialView("_DetailUser", tbl);
         }      
@@ -83,6 +91,14 @@ namespace MVC6.Controllers
                 }
                 return Json(new { status = status }, JsonRequestBehavior.AllowGet);
             }
+            if (string.IsNullOrEmpty(model.Ma_BP))
+            {
+                ViewBag.Team = new SelectList(new TeamDao().load(), "Ma_TO", "Ten_TO");
+            }
+            else
+            {
+                ViewBag.Team = new SelectList(new TeamDao().load().Where(m => m.Ma_BP == model.Ma_BP), "Ma_TO", "Ten_TO");
+            }
             Bind();
             return PartialView("_DetailUser", model);
         }
@@ -113,7 +129,7 @@ namespace MVC6.Controllers
         private void Bind()
         {
             ViewBag.Dept = new SelectList(new DepartmentDao().load(), "Ma_BP", "Ten_BP");
-            ViewBag.Team = new SelectList(new TeamDao().load(), "Ma_TO", "Ten_TO");
+            
             ViewBag.Position = new SelectList(new PositionDao().load(), "Ma_CV", "Ten_CV");
             List<SelectListItem> SelYN = new List<SelectListItem>();
            
@@ -129,6 +145,11 @@ namespace MVC6.Controllers
             });
 
             ViewBag.Sex = SelYN;
+        }
+        public ActionResult ChangeBP(string ma)
+        {
+            var data = new TeamDao().load().Where(m => m.Ma_BP == ma);
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
     }
 }

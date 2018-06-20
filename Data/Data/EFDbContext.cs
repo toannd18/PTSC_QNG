@@ -1,9 +1,6 @@
 namespace Data.Data
 {
-    using System;
     using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
 
     public partial class EFDbContext : DbContext
     {
@@ -28,7 +25,7 @@ namespace Data.Data
         public virtual DbSet<tbl_List_Request> tbl_List_Request { get; set; }
         public virtual DbSet<tbl_NCC> tbl_NCC { get; set; }
         public virtual DbSet<tbl_Notifications> tbl_Notifications { get; set; }
-     
+
         public virtual DbSet<tbl_TO> tbl_TO { get; set; }
         public virtual DbSet<tbl_DeXuat> tbl_DeXuat { get; set; }
         public virtual DbSet<tbl_DeXuat_KT> tbl_DeXuat_KT { get; set; }
@@ -38,6 +35,7 @@ namespace Data.Data
         public virtual DbSet<tbl_DG_KT> tbl_DG_KT { get; set; }
         public virtual DbSet<tbl_DG_TM> tbl_DG_TM { get; set; }
         public virtual DbSet<tbl_DeXuat_HD> tbl_DeXuat_HD { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -183,7 +181,7 @@ namespace Data.Data
 
             modelBuilder.Entity<tbl_List_Check>()
                 .Property(e => e.Ma_TB)
-                .IsUnicode(true);
+                .IsUnicode(true).HasMaxLength(50);
 
             modelBuilder.Entity<tbl_List_Check>()
                 .Property(e => e.User_Nhap)
@@ -294,10 +292,6 @@ namespace Data.Data
             modelBuilder.Entity<tbl_DeXuat_HD>()
                 .Property(e => e.Diem)
                 .IsUnicode(false);
-
-
         }
-
-       
     }
 }

@@ -17,7 +17,7 @@ namespace DataService.Dao.Systems
         }
         public List<tbl_CV> load()
         {
-            return db.tbl_CV.ToList();
+            return db.tbl_CV.OrderBy(m=>m.Display).ToList();
         }
         public PositionModel detail(string ma)
         {

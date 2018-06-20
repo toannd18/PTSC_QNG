@@ -694,6 +694,7 @@
     <Content Include="Scripts\js\department.js" />
     <Content Include="Scripts\js\equipment.js" />
     <Content Include="Scripts\js\function.js" />
+    <Content Include="Scripts\js\shared\getnotification.js" />
     <Content Include="Scripts\js\Systems\provide.js" />
     <Content Include="Scripts\js\reports\searchlevel.js" />
     <Content Include="Scripts\js\application\request.js" />
@@ -705,7 +706,7 @@
     <Content Include="Scripts\js\trade\evaluetm.js" />
     <Content Include="Scripts\js\trade\tradedetail.js" />
     <Content Include="Scripts\js\trade\traderequest.js" />
-    <Content Include="Scripts\js\user.js" />
+    <Content Include="Scripts\js\Systems\user.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
@@ -716,6 +717,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\js\shared\ptsc.js" />
     <Content Include="Scripts\shieldUI.js" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="Web.config">

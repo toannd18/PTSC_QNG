@@ -1,12 +1,12 @@
 ﻿@model List<DataService.Dao.Trade.DGTMModel>
 @using System.Globalization
 @{
-    ViewBag.Title = "IndexCom";
+    ViewBag.Title = "Đánh giá thương mại";
     Layout = "~/Views/Shared/_Layoutadmin.cshtml";
- 
-        var getDGTM = ViewBag.DGTM as List<DataService.Dao.Trade.DG_TMView>;
 
-   
+    var getDGTM = ViewBag.DGTM as List<DataService.Dao.Trade.DG_TMView>;
+
+
 }
 
 @section style{
@@ -16,7 +16,7 @@
 
     <script src="~/Scripts/js/trade/evaluetm.js"></script>
 }
-<h3 class="blank1">Phiếu Đề Xuất</h3>
+<h3 class="blank1">Đánh Giá Thương Mại</h3>
 <div class="bs-example4" data-example-id="simple-responsive-table">
     <div class="table-responsive">
         <div class="form-group">
@@ -69,28 +69,29 @@
 
                                 if (item.Ma_NCC == item1.NCC)
                                 {
-                        <td>@(String.Format(CultureInfo.InvariantCulture, "{0:#,###}", item1.Don_Gia))</td>
+                                    <td>@(String.Format(CultureInfo.InvariantCulture, "{0:#,###}", item1.Don_Gia))</td>
                                     <td class="sum">@(String.Format(CultureInfo.InvariantCulture, "{0:#,###}", item1.Tien))</td>
                                 }
                             }
                         }
                     </tr>
                 }
-                    <tr style="font-weight:bold">
-                        <td>2</td>
-                        <td>Vận chuyển</td>
-                        <td></td>
-                        <td></td>
-                        @foreach (var item in ViewBag.NCC)
+                <tr style="font-weight:bold">
+                    <td>2</td>
+                    <td>Vận chuyển</td>
+                    <td></td>
+                    <td></td>
+                    @foreach (var item in ViewBag.NCC)
+                    {
+                        if (getDGTM.Count > 0)
                         {
-                            if (getDGTM.Count>0)
-                            {
-                            <td colspan="2">@(getDGTM.Where(m => m.Ma_NCC == item.Ma_NCC).Select(m => m.Van_Chuyen).FirstOrDefault()? "Đã bao gồm" : "Không bao gồm")</td>
-                            }
-                            else
-                            { <td colspan="2">Đã bao gồm</td>}
-}
-                    </tr>
+                            <td colspan="2">@(getDGTM.Where(m => m.Ma_NCC == item.Ma_NCC).Select(m => m.Van_Chuyen).FirstOrDefault() ? "Đã bao gồm" : "Không bao gồm")</td>
+                        }
+                        else
+                        {
+                            <td colspan="2">Đã bao gồm</td>}
+                    }
+                </tr>
                 <tr style="font-weight:bold">
                     <td>3</td>
                     <td>Thuế 10%</td>
@@ -150,7 +151,7 @@
                         <td colspan="2">@(getDGTM.Where(m => m.Ma_NCC == item.Ma_NCC).Select(m => m.Dieu_Kien).FirstOrDefault())</td>
                     }
                 </tr>
-                
+
                 <tr style="font-weight:bold">
                     <td>9</td>
                     <td>Bảo hành</td>
@@ -195,5 +196,13 @@
         </table>
     </div>
 </div>
-
+<input type="hidden" value="0" id="dem" />
+<!-- Toolbox-->
+<div id="toolbox" class="toolbox">
+    <div class="list-group">
+        <button type="button" class="list-group-item" data-toggle="tooltip" data-placement="top" title="Đầu trang" onclick="ptsc.loadanimate('home')"><span class="glyphicon glyphicon-arrow-up"></span></button>
+        <button type="button" class="list-group-item" onclick="getdata()" data-toggle="tooltip" data-placement="left" title="Đánh giá"><span class="glyphicon glyphicon-pencil"></span></button>
+        <button type="button" class="list-group-item" onclick="gettm()" data-toggle="tooltip" data-placement="bottom" title="Thương mại"><span class="glyphicon glyphicon-shopping-cart"></span></button>
+    </div>
+</div>
 @Html.Partial("~/Views/Shared/_Modal.cshtml")

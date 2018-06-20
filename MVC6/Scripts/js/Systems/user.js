@@ -47,7 +47,10 @@ function detail(ma) {
                 }
                 else
                     $('#UserName').prop('readonly', false);
-           
+                $('#Ma_BP').change(function () {
+
+                    loadTema($(this).val());
+                });
         },
         error: function (ex) {
             $.notify(ex, "error");
@@ -160,6 +163,24 @@ function saverole() {
         },
         error: function (ex) {
             bootbox.alert(ex);
+        }
+    });
+}
+function loadTema(ma) {
+    $.ajax({
+        url: '/Users/ChangeBP',
+        data: { ma: ma },
+        type: 'Get',
+        success: function (data) {
+            var render = '<option value="">--- Chọn ---</option>';
+            $.each(data, function (i, item) {
+                render += '<option value="' + item.Ma_TO + '">' + item.Ten_TO + '</option>';
+            });
+            $('#Ma_TO').html(render);
+        },
+        error: function (err) {
+            console.log(err);
+            ptsc.notify("Không thể load tổ", "error");
         }
     });
 }
