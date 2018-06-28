@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Data
 {
@@ -42,5 +43,7 @@ namespace Data.Data
 
         [Display(Name = "Xếp loại")]
         public string Diem { get; set; }
+        [Column(TypeName ="varchar")]
+        public string Author { get; set; }
     }
 }

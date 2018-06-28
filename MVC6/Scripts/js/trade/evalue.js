@@ -9,6 +9,7 @@
     });
     $('[data-toggle="tooltip"]').tooltip();
 });
+// Đánh giá nhà cung cấp heo kỹ thuật
 function getdata() {
     var t = $("#spectable >tbody >tr").filter(".info").data("id");
     if (t === undefined) {
@@ -63,6 +64,7 @@ function getdata() {
         });
     }
 }
+//Change nhà cung cấp 
 function detaildata(ma) {
     $.ajax({
         url: '/Commerce/Evaluations/DetailSpec',
@@ -94,6 +96,7 @@ function detaildata(ma) {
         }
     });
 }
+//Lưu đánh giá kỹ thuật
 function savedata() {
     var form = $('#dgkttable').closest('form');
     form.removeData('validator');
@@ -120,19 +123,23 @@ function savedata() {
 
     });
 }
+
+// Lấy dữ liệu nhà cung cấp
 function detailncc(ma) {
     $.ajax({
         url: '/Commerce/Evaluations/Detail',
-        data: { dx: $("#dxid").val(), ma_ncc: ma },
+        data: { dx: $("#dxid").val(), ma_ncc: ma},
         type: 'Get',
         success: function (data) {
-            $('#modalbody').html(data);
-            var form = $('#ncckttable').closest('form');
-            form.removeData('validator');
-            form.removeData('unobtrusiveValidation');
-            $.validator.unobtrusive.parse(form);
-            $("#idTM").hide();
             Alert(true, true, "");
+            if (data.DG_KT === "") {
+                $("#DG_KT").val("False");
+            }
+            else {
+                $("#DG_KT").val(data.DG_KT ? "True" : "False");
+
+            }
+            $("#DG_TM").val(data.DG_TM.toString());
         },
         error: function (err) {
             $('#myModal').modal('hide');
@@ -140,6 +147,7 @@ function detailncc(ma) {
         }
     });
 }
+//Lưu đánh giá chung
 function savencc() {
     var form = $('#ncckttable').closest('form');
     form.removeData('validator');

@@ -12,6 +12,7 @@
                 }
             },
             { data: 'Ten_BP' },
+            { data: 'Hang_Muc' },
             { data: 'Dia_Diem' },
             {
                 data: 'Date', render: function (data) {

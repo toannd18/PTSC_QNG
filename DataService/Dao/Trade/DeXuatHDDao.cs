@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Web;
 
 namespace DataService.Dao.Trade
 {
@@ -63,6 +64,7 @@ namespace DataService.Dao.Trade
                 model.Tien_Do = tbl.Tien_Do;
                 model.Ma_NCC = tbl.Ma_NCC;
                 model.Diem = tbl.Diem;
+                model.Author = HttpContext.Current.User.Identity.Name.ToString();
                 db.Entry(model).State = model.Id == 0 ? EntityState.Added : EntityState.Modified;
                 db.SaveChanges();
                 Tinh(model.Ma_NCC);
@@ -78,9 +80,14 @@ namespace DataService.Dao.Trade
             try
             {
                 var model = db.tbl_DeXuat_HD.Find(Id);
-                db.tbl_DeXuat_HD.Remove(model);
-                db.SaveChanges();
-                return true;
+                if(model.Author==HttpContext.Current.User.Identity.Name.ToString())
+                {
+                    db.tbl_DeXuat_HD.Remove(model);
+                    db.SaveChanges();
+                    return true;
+                }
+
+                return false;
             }
             catch
             {

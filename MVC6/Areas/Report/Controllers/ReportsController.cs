@@ -164,7 +164,7 @@ namespace MVC6.Areas.Report.Controllers
                              Danh_Gia_TP = m.Danh_Gia_TP,
                              Y_Kien_TP = m.Y_Kien_TP
                          }).ToList();
-            string documentName = "Từ " + FromTime.ToString("dd/MM/yyyy") + " Tới " + Totime.ToString("dd/MM/yyyy");
+            string documentName = "Tu " + FromTime.ToString("dd/MM/yyyy") + " Toi " + Totime.ToString("dd/MM/yyyy");
             documentName = string.Format("Bao cao nhat ky cong viec {0}.xlsx", documentName);
             string templateDocument = HttpContext.Server.MapPath("~/Files/Templates/Bao cao nhat ky cong viec.xlsx");
             using (FileStream templateDocumentStream = System.IO.File.OpenRead(templateDocument))
@@ -361,7 +361,7 @@ namespace MVC6.Areas.Report.Controllers
                     sub_Total = TongTien * 0.1;
                     TongTien = Convert.ToInt32(sub_Total) + TongTien;
                     sheet_1.Cells[38 + rowInsert + t, 3].Value = TongTien.ToString("0,###") + " VNĐ (đã bao gồm thuế VAT)";
-                    string documentName = string.Format("Danh gia nha cung cap duoi 30tr de xuat {0}.xlsx", _dexuat.Ma);
+                    string documentName = string.Format("Danh gia nha cung cap trên 30tr de xuat {0}.xlsx", _dexuat.Ma);
                     Response.ClearContent();
                     Response.BinaryWrite(package.GetAsByteArray());
                     Response.AddHeader("content-disposition",
@@ -375,7 +375,7 @@ namespace MVC6.Areas.Report.Controllers
 
         public void EvaluePrice(int dx)
         {
-            string documentname = string.Format("Thu moi chao gia de xuat {0}.xlsx", dx);
+            
             string templateDocument = HttpContext.Server.MapPath("~/Files/Templates/Sample Chao gia.xlsx");
             string tieude;
             var _tm = new DeXuatTMDao().load(dx).FirstOrDefault();
@@ -430,6 +430,7 @@ namespace MVC6.Areas.Report.Controllers
                         }
                     }
                     package.Workbook.Worksheets["Thu moi chao gia"].Hidden = eWorkSheetHidden.VeryHidden;
+                    string documentname = string.Format("Thu moi chao gia de xuat {0}.xlsx", _supplier.FirstOrDefault().Ma.ToString());
                     Response.ClearContent();
                     Response.BinaryWrite(package.GetAsByteArray());
                     Response.AddHeader("content-disposition",
@@ -443,7 +444,7 @@ namespace MVC6.Areas.Report.Controllers
 
         public void EvaluePlan(int dx)
         {
-            string documentName = string.Format("Lap ke hoach mua sam {0}.xlsx", dx);
+            
             string templateDocument = HttpContext.Server.MapPath("~/Files/Templates/Sample Lap Ke Hoach.xlsx");
             using (FileStream templateDocumentStream = System.IO.File.OpenRead(templateDocument))
             {
@@ -467,13 +468,13 @@ namespace MVC6.Areas.Report.Controllers
                     sheet.Cells[24, 3].Value = ": " + (_dexuat.Ngay_HD.HasValue ? _dexuat.Ngay_HD.Value.ToString("dd/MM/yyyy") : "");
                     sheet.Cells[25, 3].Value = ": " + (_dexuat.Ngay_PHD.HasValue ? _dexuat.Ngay_PHD.Value.ToString("dd/MM/yyyy") : "");
                     sheet.Cells[27, 1].Value = "1.";
-                    sheet.Cells[27, 2].Value = _user.Where(k => k.UserName == _dexuat.Ten_Dg).Select(k => k.FullName + "- Email:" + k.Email) + ": Tổ trưởng";
+                    sheet.Cells[27, 2].Value = _user.Where(k => k.UserName == _dexuat.Ten_Dg).Select(k => k.FullName + "- Email:" + k.Email).FirstOrDefault() + ": Tổ trưởng";
 
                     sheet.Cells[28, 1].Value = "2.";
-                    sheet.Cells[28, 2].Value = _user.Where(k => k.UserName == _dexuat.Ten_Dg1).Select(k => k.FullName + "- Email:" + k.Email) + ": Tổ phó thuong mại";
+                    sheet.Cells[28, 2].Value = _user.Where(k => k.UserName == _dexuat.Ten_Dg1).Select(k => k.FullName + "- Email:" + k.Email).FirstOrDefault() + ": Tổ phó thuong mại";
 
                     sheet.Cells[29, 1].Value = "3.";
-                    sheet.Cells[29, 2].Value = _user.Where(k => k.UserName == _dexuat.Ten_Dg2).Select(k => k.FullName + "- Email:" + k.Email) + ": Tổ phó kỹ thuật";
+                    sheet.Cells[29, 2].Value = _user.Where(k => k.UserName == _dexuat.Ten_Dg2).Select(k => k.FullName + "- Email:" + k.Email).FirstOrDefault() + ": Tổ phó kỹ thuật";
 
                     if (!string.IsNullOrEmpty(_dexuat.Ten_Dg3))
                     {
@@ -481,7 +482,7 @@ namespace MVC6.Areas.Report.Controllers
                         sheet.InsertRow(30, 1);
                         sheet.Cells[29, 1, 29, 5].Copy(sheet.Cells[30, 1, 30, 5]);
                         sheet.Cells[30, 1].Value = "4.";
-                        sheet.Cells[30, 2].Value = _user.Where(k => k.UserName == _dexuat.Ten_Dg3).Select(k => k.FullName + "- Email:" + k.Email) + ": Tổ viên thương mại";
+                        sheet.Cells[30, 2].Value = _user.Where(k => k.UserName == _dexuat.Ten_Dg3).Select(k => k.FullName + "- Email:" + k.Email).FirstOrDefault() + ": Tổ viên thương mại";
                     }
                     if (!string.IsNullOrEmpty(_dexuat.Ten_Dg4))
                     {
@@ -489,7 +490,7 @@ namespace MVC6.Areas.Report.Controllers
                         sheet.InsertRow(31, 1);
                         sheet.Cells[29, 1, 29, 5].Copy(sheet.Cells[31, 1, 31, 5]);
                         sheet.Cells[31, 1].Value = "5.";
-                        sheet.Cells[31, 2].Value = _user.Where(k => k.UserName == _dexuat.Ten_Dg4).Select(k => k.FullName + "- Email:" + k.Email) + ": Tổ viên kỹ thuật";
+                        sheet.Cells[31, 2].Value = _user.Where(k => k.UserName == _dexuat.Ten_Dg4).Select(k => k.FullName + "- Email:" + k.Email).FirstOrDefault() + ": Tổ viên kỹ thuật";
                     }
 
                     int t = _supplier.Count;
@@ -510,7 +511,7 @@ namespace MVC6.Areas.Report.Controllers
                         i++;
                         rowIndex += 4;
                     }
-
+                    string documentName = string.Format("Lap ke hoach mua sam {0}.xlsx", _dexuat.Ma.ToString());
                     Response.ClearContent();
                     Response.BinaryWrite(package.GetAsByteArray());
                     Response.AddHeader("content-disposition",

@@ -12,7 +12,7 @@ namespace MVC6.Areas.Commerce.Controllers
         // GET: Commerce/Evaluations
         public ActionResult IndexSpec(int dx)
         {
-            if(!new DeXuatDao().PermissionDx(HttpContext.User.Identity.Name))
+            if (!new DeXuatDao().PermissionDx(HttpContext.User.Identity.Name))
             {
                 return RedirectToAction("Login", "Account", new { Area = "" });
             }
@@ -69,8 +69,8 @@ namespace MVC6.Areas.Commerce.Controllers
         public ActionResult Detail(int dx, string ma_ncc)
         {
             var tbl = new DeXuatNCCDao().Load(dx).Where(m => m.Ma_NCC == ma_ncc).FirstOrDefault();
-            ViewBag.NCC = new SelectList(new DeXuatNCCDao().Load(dx), "Ma_NCC", "Ten_NCC");
-            return PartialView("_DetailNCC_KT", tbl);
+
+            return Json(tbl,JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult SaveNCCKT(DGNCCModel model)
@@ -109,7 +109,7 @@ namespace MVC6.Areas.Commerce.Controllers
         {
             tbl_DG_KT model = new tbl_DG_KT();
             model = new DGKTDao().Detail(dg_kt).Where(m => m.DG_NCC_Id == NCC).FirstOrDefault();
-            if (model==null)
+            if (model == null)
             {
                 return Json(new { status = false }, JsonRequestBehavior.AllowGet);
             }
@@ -134,7 +134,7 @@ namespace MVC6.Areas.Commerce.Controllers
         public ActionResult DetailDGTM(int NCC, int dx)
         {
             var tbl = new DGTMDao().DetailTM(dx).Where(m => m.DG_NCC_Id == NCC).FirstOrDefault();
-            if (tbl ==null)
+            if (tbl == null)
             {
                 return Json(new { status = false }, JsonRequestBehavior.AllowGet);
             }

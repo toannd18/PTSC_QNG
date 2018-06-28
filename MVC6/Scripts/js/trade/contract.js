@@ -43,7 +43,7 @@ function detaildata(id) {
         data: { Id: id },
         type: 'Get',
         success: function (data) {
-
+           
             $('#myModal').modal('show');
             $('#modalbody').html(data);
             
@@ -55,52 +55,15 @@ function detaildata(id) {
                 ignore: []
                 // any other default options and/or rules
             });
-          
-            $("#Ten_Dx").change(function () {
-                var ma = $("#DeXuatId").val();
-                $.ajax({
-                    url: '/Commerce/Contractions/SelectSupplier',
-                    data: { dx: ma },
-                    success: function (data) {
-                        if (data.DG === 1) {
-                            $('#Ten_NCC').val(data.Ten_NCC);
-                            $('#Ma_NCC').val(data.Ma_NCC);
-                        }
-                        else {
-                            alert("Bạn chưa đánh giá nhà cung cấp");
-                            $('#Ten_NCC').val("");
-                            $('#Ma_NCC').val("");
-                            $("#Ten_Dx").val("");
-                            $("#DeXuatId").val("");
-                            $("#Ten_Dx").focus();
-                            $('#Nguoi_TH').val("");
-                        }
-                        var form = $('#contractform').closest('form');
-                        form.removeData('validator');
-                        form.removeData('unobtrusiveValidation');
-                        $.validator.unobtrusive.parse(form);
-                        $.validator.addMethod('date',
-                            function (value, element) {
-      if (this.optional(element)) {
-          return true;
-      }
-
-      var ok = true;
-      try {
-          $.datepicker.parseDate('dd/mm/yy', value);
-      }
-      catch (err) {
-          ok = false;
-      }
-      return ok;
-  });
-                        form.valid();
-                    }
-                });
-            });
-            
+        
             TongDiem();
+            
             GetHd();
+           
+        },
+        error: function (err) {
+            console.log(err);
+            ptsc.notify("Lỗi kết nối ajax", "error");
         }
     });
 }
@@ -146,7 +109,7 @@ function savedata() {
             }
             else if (res === false) {
                 $('#myModal').modal('hide');
-                $.notify("Lỗi Kết Nối", "error");
+                $.notify("Lỗi kết nối ajax", "error");
             }
         }
     });
@@ -214,20 +177,23 @@ function auto_complete(id, sub) {
             id.val(ui.item.Ma);
             $('#Nguoi_TH').val(ui.item.FullName_TH);
             sub.val(ui.item.Id);
-            var kieu = $("#Ten_HD").val();
-            if (kieu.length >= 19) {
-                kieu = kieu.substr(0, kieu.length - 2);
-            }
-            if (ui.item.Kieu) {
-                kieu = kieu + "HH";
-            }
-            else {
-                kieu = kieu + "DV";
-            }
+           
             return false;
         },
         change: function (event, ui) {
             if (ui.item) {
+                ChangeHd(ui.item.Id);
+                var kieu = $("#Ten_HD").val();
+                if (kieu.length >= 19) {
+                    kieu = kieu.substr(0, kieu.length - 2);
+                }
+                if (ui.item.Kieu) {
+                    kieu = kieu + "-MHH";
+                }
+                else {
+                    kieu = kieu + "-MDV";
+                }
+                $("#Ten_HD").val(kieu);
                 return false;
             }
             else {
@@ -263,16 +229,59 @@ function GetHd() {
             success: function (data) {
                 $("#So_HD").val(data);
                 var Ten_Hd = $("#Ten_HD").val();
-                if (!$("#Ten_HD").prop("readonly")) {
-                    if (Ten_Hd.length >= 19) {
+                if (Ten_Hd.length >= 19) {
                         $("#Ten_HD").val(data + "-" + year + Ten_Hd.substr(-13));
                     }
                     else {
                         $("#Ten_HD").val(data + "-" + year + "-PTSC-QNG");
                     }
-                }
+            
                 
             }
         });
     });
+}
+
+function ChangeHd(ma) {
+        $.ajax({
+            url: '/Commerce/Contractions/SelectSupplier',
+            data: { dx: ma },
+            success: function (data) {
+
+                if (data.DG === 1) {
+                    $('#Ten_NCC').val(data.Ten_NCC);
+                    $('#Ma_NCC').val(data.Ma_NCC);
+                }
+                else {
+                    alert("Bạn chưa đánh giá nhà cung cấp");
+                    $('#Ten_NCC').val("");
+                    $('#Ma_NCC').val("");
+                    $("#Ten_Dx").val("");
+                    $("#DeXuatId").val("");
+                    $("#Ten_Dx").focus();
+                    $('#Nguoi_TH').val("");
+                }
+                var form = $('#contractform').closest('form');
+                form.removeData('validator');
+                form.removeData('unobtrusiveValidation');
+                $.validator.unobtrusive.parse(form);
+                $.validator.addMethod('date',
+                function (value, element) {
+                    if (this.optional(element)) {
+                        return true;
+                    }
+
+                    var ok = true;
+                    try {
+                        $.datepicker.parseDate('dd/mm/yy', value);
+                    }
+                    catch (err) {
+                        ok = false;
+                    }
+                    return ok;
+                });
+                form.valid();
+            }
+        });
+   
 }

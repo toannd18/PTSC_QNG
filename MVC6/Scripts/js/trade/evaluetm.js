@@ -171,10 +171,7 @@ function detailtm(ma){
             }
             $('#Id').val(data.Id);
             $('#DeXuatId').val(data.DeXuatId);
-       
-                $('#Van_Chuyen').val(data.Van_Chuyen?"True":"False");
-         
-            
+            $('#Van_Chuyen').val(data.Van_Chuyen?"True":"False");
             $('#BH').val(data.BH);
             $('#Hieu_Luc').val(data.Hieu_Luc);
             $('#Thoi_Gian').val(data.Thoi_Gian);
@@ -223,12 +220,8 @@ function detailncc(ma) {
         data: { dx: $("#dxid").val(), ma_ncc: ma },
         type: 'Get',
         success: function (data) {
-            $('#modalbody').html(data);
-            var form = $('#ncckttable').closest('form');
-            form.removeData('validator');
-            form.removeData('unobtrusiveValidation');
-            $.validator.unobtrusive.parse(form);
-            $("#idKT").hide();
+            $("#DG_TM").val(data.DG_TM);
+            $("#DG_KT").val(data.DG_KT ? "True" : "False");
             Alert(true, true, "");
         },
         error: function (err) {

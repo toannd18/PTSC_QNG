@@ -29,5 +29,9 @@ namespace Data.Data
         {
             get; set;
         }
+        public tbl_DG_TM()
+        {
+            Van_Chuyen = true;
+        }
     }
 }
